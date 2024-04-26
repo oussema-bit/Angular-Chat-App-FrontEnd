@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {RouterModule, RouterOutlet, Routes} from "@angular/router";
 import { MyFirstCompComponent } from './my-first-comp/my-first-comp.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { MessageDetailsComponent } from './message-details/message-details.component';
 import { MenuComponent } from './menu/menu.component';
 import { AboutComponent } from './about/about.component';
@@ -28,13 +28,14 @@ import { ChatPageComponent } from './chat-page/chat-page.component';
     SignUpPageComponent,
     ChatPageComponent,
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    ApiModule.forRoot({rootUrl:'http://localhost:8083'})
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        ApiModule.forRoot({rootUrl: 'http://localhost:8083'}),
+        ReactiveFormsModule
+    ],
   exports:[],//Added for routing
   providers: [HttpClient],
   bootstrap: [AppComponent]
