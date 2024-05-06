@@ -1,0 +1,25 @@
+<div id="carouselExampleIndicators" class="carousel carousel-custom-width slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <!-- Dynamic carousel indicators -->
+    <button type="button" data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="i" [class.active]="i === 0" *ngFor="let f of forums; let i = index"></button>
+  </div>
+  <div class="carousel-inner bg-dark" style="height: 650px;">
+    <!-- Carousel items generated dynamically -->
+    <div class="carousel-item" *ngFor="let f of forums; let i = index" [class.active]="i === 0">
+      <img src="/assets/91665690_3663250893746411_6532230122857037824_n.jpg" class="d-block w-100" style="max-height: 650px;" alt="Placeholder Image">
+      <div class="carousel-caption d-none d-md-block" style="color: #c14047;">
+        <h5 style="font-weight: bold; margin-bottom: 20px; font-size: 36px; font-family: 'Arial', sans-serif;">{{f.forum_name}}</h5>
+        <p style="margin-bottom: 15px; font-size: 24px; font-family: 'Arial', sans-serif;">{{f.description}}</p>
+            <a href="#" style="margin-bottom: 20px; font-size: 20px; font-family: 'Arial', sans-serif;" class="btn btn-danger rounded-pill" [routerLink]="['/topic-page', f.forum_id]">Join Forum</a>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" style="background-color: rgba(193, 64, 71, 0.5);">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" style="background-color: rgba(193, 64, 71, 0.5);">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

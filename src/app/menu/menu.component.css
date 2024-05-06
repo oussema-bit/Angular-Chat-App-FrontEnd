@@ -1,0 +1,80 @@
+.navbar-container{
+  width: 100vw;
+  height: 7vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #282828;
+}
+.elements-container{
+  width: 90%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.left-side-container{
+  width: 65%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.right-side-container{
+  width: 20%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.logo-style{
+  width: 24%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.logo-img{
+  width: 45%;
+  height: 100%;
+  filter: invert(100%);
+}
+.logo-text{
+  font-size: 1.2rem;
+  font-family: 'Montserrat';
+  width: 40%;
+  background-color: red;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+.text-logo{
+  font-size: 1.2rem;
+  font-family: 'Montserrat';
+  color: #818181;
+}
+.element-style{
+  color: #fff9;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-family: 'Montserrat';
+  font-weight: 500;
+  cursor: pointer;
+}
+.element-style:hover{
+  color: white;
+}
+
+.user-frame-style{
+  width: 15%;
+  border-radius: 100% ;
+}
+.forum-list {
+  display: none; /* Initially hide the forum list */
+}
+
+.show-forums .forum-list {
+  display: block; /* Show forum list when menu is active */
+}

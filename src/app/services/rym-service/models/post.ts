@@ -1,10 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
-import { Comment } from '../models/comment';
-import { Topic } from '../models/topic';
-import { User } from '../models/user';
+import {Topic} from "./topic";
+
 export interface Post {
-  comments?: Array<Comment>;
   content?: string;
   createdAt?: string;
   dislikesCount?: number;
@@ -13,6 +11,7 @@ export interface Post {
   pinned?: boolean;
   post_id?: number;
   topic?: Topic;
-  user?: User;
   voteCount?: number;
+  comments?: Comment;
+
 }

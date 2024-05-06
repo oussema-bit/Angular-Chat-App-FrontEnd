@@ -27,8 +27,11 @@ import { pinMostLikedPost } from '../fn/post-controller/pin-most-liked-post';
 import { PinMostLikedPost$Params } from '../fn/post-controller/pin-most-liked-post';
 import { Post } from '../models/post';
 import { PostDto } from '../models/post-dto';
+import { sharePostToDiscord } from '../fn/post-controller/share-post-to-discord';
+import { SharePostToDiscord$Params } from '../fn/post-controller/share-post-to-discord';
 import { updatePost } from '../fn/post-controller/update-post';
 import { UpdatePost$Params } from '../fn/post-controller/update-post';
+import {Topic} from "../models/topic";
 
 @Injectable({ providedIn: 'root' })
 export class PostControllerService extends BaseService {
@@ -58,6 +61,31 @@ export class PostControllerService extends BaseService {
   updatePost(params: UpdatePost$Params, context?: HttpContext): Observable<PostDto> {
     return this.updatePost$Response(params, context).pipe(
       map((r: StrictHttpResponse<PostDto>): PostDto => r.body)
+    );
+  }
+
+  /** Path part for operation `sharePostToDiscord()` */
+  static readonly SharePostToDiscordPath = '/api/forums/topics/posts/posts/{postId}/shareToDiscord';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `sharePostToDiscord()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  sharePostToDiscord$Response(params: SharePostToDiscord$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return sharePostToDiscord(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `sharePostToDiscord$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  sharePostToDiscord(params: SharePostToDiscord$Params, context?: HttpContext): Observable<void> {
+    return this.sharePostToDiscord$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 
@@ -275,6 +303,12 @@ export class PostControllerService extends BaseService {
 }>): {
 } => r.body)
     );
+  }
+
+
+  getAllPostsByTopic(id: number): Observable<any> {
+    return this.http.get<Post>(` http://localhost:8083/api/forums/topics/posts/${id}`);
+
   }
 
 }

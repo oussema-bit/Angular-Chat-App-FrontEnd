@@ -15,6 +15,8 @@ import { deleteTopic } from '../fn/topic-controller/delete-topic';
 import { DeleteTopic$Params } from '../fn/topic-controller/delete-topic';
 import { getAllTopics } from '../fn/topic-controller/get-all-topics';
 import { GetAllTopics$Params } from '../fn/topic-controller/get-all-topics';
+import { getAllTopicsByForumId } from '../fn/topic-controller/get-all-topics-by-forum-id';
+import { GetAllTopicsByForumId$Params } from '../fn/topic-controller/get-all-topics-by-forum-id';
 import { getPostById1 } from '../fn/topic-controller/get-post-by-id-1';
 import { GetPostById1$Params } from '../fn/topic-controller/get-post-by-id-1';
 import { Topic } from '../models/topic';
@@ -77,6 +79,37 @@ export class TopicControllerService extends BaseService {
       map((r: StrictHttpResponse<TopicDto>): TopicDto => r.body)
     );
   }
+
+  /** Path part for operation `getAllTopicsByForumId()` */
+  static readonly GetAllTopicsByForumIdPath = '/api/forums/topics/{forum_id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getAllTopicsByForumId()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllTopicsByForumId$Response(params: GetAllTopicsByForumId$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Topic>>> {
+    return getAllTopicsByForumId(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getAllTopicsByForumId$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllTopicsByForumId(params: GetAllTopicsByForumId$Params, context?: HttpContext): Observable<Array<Topic>> {
+    return this.getAllTopicsByForumId$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<Topic>>): Array<Topic> => r.body)
+    );
+  }
+
+  getAllTopicsByForum(id: number): Observable<any> {
+    return this.http.get<Topic>(`http://localhost:8083/api/forums/topics/${id}`);
+  }
+
+
 
   /** Path part for operation `getPostById1()` */
   static readonly GetPostById1Path = '/api/forums/topics/getTopicById/{id}';

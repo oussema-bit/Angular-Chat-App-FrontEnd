@@ -1,0 +1,14 @@
+<br>
+<div class="row">
+  <div class="col-md-4 mb-4" *ngFor="let t of topics">
+    <div class="card border-0 rounded-lg shadow-lg" style="background-color: #f5f5f5;">
+
+      <div class="card-body py-4 px-3">
+        <h5 class="card-title text-dark font-weight-bold">{{ t.title }}</h5>
+        <p class="card-text text-muted">{{ t.createdAt }}</p>
+        <a href="#" class="btn btn-primary rounded-pill" [routerLink]="['/post-page', t.topic_id]">Check Topic</a>
+      </div>
+
+    </div>
+  </div>
+</div>

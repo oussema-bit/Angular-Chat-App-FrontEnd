@@ -10,6 +10,11 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
+        "serve": {
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          }
+        },
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
@@ -29,7 +34,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.css"
 
             ],
-            "scripts": []
+            "scripts": [ "node_modules/jquery/dist/jquery.min.js"]
           },
           "configurations": {
             "production": {
@@ -96,5 +101,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

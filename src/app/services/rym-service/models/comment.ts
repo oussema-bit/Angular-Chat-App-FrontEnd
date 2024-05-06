@@ -10,5 +10,5 @@ export interface Comment {
   likes_count?: number;
   nestedComments?: Array<Comment>;
   parentComment?: Comment;
-  post?: Post;
+  post_id?: number;
 }

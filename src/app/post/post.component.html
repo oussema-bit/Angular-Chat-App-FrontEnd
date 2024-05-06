@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<div class="post-card">
+  <div class="post-content">
+    <h1>Post Content</h1>
+    <p>{{ postContent }}</p>
+  </div>
+
+
+  <div class="actions-section">
+    <div class="action-item">
+      <i class="fas fa-thumbs-up"></i> {{postLikes}} <span>Like</span>
+    </div>
+    <div class="action-item">
+      <i class="fas fa-thumbs-down"></i>  {{postDislikes}}<span>Dislike</span>
+    </div>
+    <div class="action-item">
+      <i class="fas fa-share"></i>  <span>Share to Discord</span>
+    </div>
+
+    <div class="comments-section">
+      <h2>Comments</h2>
+      <ul>
+        <li *ngFor="let comment of comments">{{ comment }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

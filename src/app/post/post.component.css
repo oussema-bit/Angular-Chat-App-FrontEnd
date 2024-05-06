@@ -1,0 +1,43 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+.container {
+  padding-top: 20px;
+}
+
+.post {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.post h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.post p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.post-info {
+  font-size: 14px;
+}
+
+.comments {
+  margin-top: 20px;
+}
+
+.comment p {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.nested-comments {
+  margin-left: 20px; /* Adjust the margin to create indentation */
+}

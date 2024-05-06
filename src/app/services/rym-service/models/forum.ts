@@ -1,9 +1,12 @@
 /* tslint:disable */
 /* eslint-disable */
+import { Topic } from '../models/topic';
+import { User } from '../models/user';
 export interface Forum {
+  createdBy?: User;
   created_at?: string;
-  created_by?: string;
   description?: string;
   forum_id?: number;
   forum_name?: string;
+  topics?: Array<Topic>;
 }

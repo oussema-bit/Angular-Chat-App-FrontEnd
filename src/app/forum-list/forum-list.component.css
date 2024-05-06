@@ -1,0 +1,12 @@
+.btn-red {
+  color: #fff; /* Text color */
+  background-color: red;
+  border-color: #dc3545; /* Border color */
+}
+
+.btn-red:hover {
+  background-color: #c82333; /* Darker red color on hover */
+  border-color: #bd2130; /* Darker red color on hover */
+}
+.carousel-custom-height
+{ height: 600px}

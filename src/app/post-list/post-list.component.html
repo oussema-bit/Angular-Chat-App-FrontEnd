@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forum</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+  <style>
+    /* Custom CSS for enhanced visual appeal */
+
+    /* Body and General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #495057;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header Styles */
+    .forum-header {
+      padding: 20px;
+      background-color: #343a40;
+      color: #fff;
+      border-bottom: 2px solid #212529;
+    }
+
+    .forum-header h2 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .forum-header span {
+      font-size: 16px;
+    }
+
+    /* Post Styles */
+    .post {
+      background-color: #fff;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .post .card-body {
+      padding: 20px;
+    }
+
+    .post h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .post p {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+
+    .like-buttons button {
+      margin-right: 10px;
+      font-size: 14px;
+    }
+
+    .like-buttons button i {
+      margin-right: 5px;
+    }
+
+    .comments h4 {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .comments ul {
+      padding-left: 20px;
+    }
+
+    .comment p {
+      margin-bottom: 5px;
+    }
+
+    /* Select Styles */
+    .form-select {
+      width: 200px;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ced4da;
+      background-color: #f8f9fa;
+    }
+
+    /* Share Button Styles */
+    .share-button {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+
+    .share-button button {
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: none;
+      background-color: #007bff;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .share-button button:hover {
+      background-color: #0056b3;
+    }
+
+  </style>
+</head>
+<body>
+<div class="forum-header py-3 px-4 mb-4 bg-light text-dark rounded-lg d-flex align-items-center">
+  <i class="fas fa-globe fs-2 me-3 text-primary"></i>
+  <div>
+    <h1 class="mb-0">Welcome to Our Forum</h1>
+    <p class="mb-0">Share your questions and let your peers answer</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-9 mb-3">
+      <div class="row text-left mb-5 align-items-center">
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="filterBy" class="input-group-text bg-light text-muted border rounded-start">Filter by</label>
+            <select id="filterBy" class="form-select bg-light text-muted border rounded-end">
+              <option>None</option>
+              <option value="Likes">Likes</option>
+              <option value="Dislikes">Dislikes</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-3 text-lg-end">
+          <button class="btn btn-primary rounded-start" (click)="redirectToPostForm()">Create Post</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Posts -->
+  <div *ngFor="let post of posts" class="post card border mb-4">
+    <div class="card-body">
+      <h3>{{ post.content }}</h3>
+      <p>Created By: {{ post.createdBy }}</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="like-buttons">
+          <br> <br> <br> <br>
+          <button class="btn btn-sm btn-outline-primary" (click)="likePost(post.post_id)"><i class="far fa-thumbs-up"></i> Like</button>
+          <button class="btn btn-sm btn-outline-danger" (click)="dislikePost(post.post_id)"><i class="far fa-thumbs-down"></i> Dislike</button>
+          <button class="btn btn-sm btn-outline-dark" (click)="shareToDiscord(post.post_id)" #shareButton>
+            <img src="/assets/png-clipart-discord-computer-servers-teamspeak-discord-icon-video-game-smiley-thumbnail.png" alt="Discord Icon" height="24" width="24"> Share on Discord
+          </button>
+        </div>
+        <p class="text-muted mb-0"> Likes: {{ post.likes }} Dislikes: {{ post.dislikes }}</p>
+      </div>
+      <br>
+      <div class="comments">
+        <h4 class="mb-3">Comments:</h4>
+        <ul class="list-unstyled">
+          <ng-container *ngFor="let comment of post.comments">
+            <ng-container *ngIf="!comment.parentComment">
+              <li class="comment mb-4">
+                <div class="comment-content">
+                  <p>{{ comment.content }}</p>
+                </div>
+                <div class="nested-comments">
+                  <ul class="list-unstyled">
+                    <ng-container *ngIf="comment.nestedComments && comment.nestedComments.length">
+                      <ng-container *ngFor="let nestedComment of comment.nestedComments">
+                        <ng-template [ngTemplateOutlet]="displayNestedComments" [ngTemplateOutletContext]="{ $implicit: nestedComment }"></ng-template>
+                      </ng-container>
+                    </ng-container>
+                  </ul>
+                </div>
+              </li>
+            </ng-container>
+          </ng-container>
+          <!-- Add Comment Input -->
+          <li class="comment">
+            <div class="comment-content">
+              <!--     <input type="text" class="form-control" placeholder="Add a comment..." (keyup.enter)="addComment($event.target.value, post.post_id)">      -->      </div>
+             </li>
+           </ul>
+         </div>
+
+       </div>
+     </div>
+
+     <!-- Nested Comments Template -->
+  <ng-template #displayNestedComments let-comment>
+    <ng-container *ngIf="!comment.parentComment">
+      <li class="comment">
+        <p>{{ comment.content }}</p>
+        <ng-container *ngIf="comment.nestedComments && comment.nestedComments.length">
+          <ul class="nested-comments">
+            <ng-container *ngFor="let nestedComment of comment.nestedComments">
+              <ng-template [ngTemplateOutlet]="displayNestedComments" [ngTemplateOutletContext]="{ $implicit: nestedComment }"></ng-template>
+            </ng-container>
+          </ul>
+        </ng-container>
+      </li>
+    </ng-container>
+  </ng-template>
+</div>
+
+</body>
+
+</html>

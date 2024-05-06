@@ -269,4 +269,8 @@ export class CommentControllerService extends BaseService {
     );
   }
 
+  getCommentsByPostId(postId: number): Observable<Comment[]> {
+    return this.http.get<Comment[]>(` http://localhost:8083/api/forums/topics/posts/comments/${postId}`);
+
+  }
 }

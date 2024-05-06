@@ -6,6 +6,11 @@ export interface PostDto {
   content?: string;
   createdAt?: string;
   createdBy?: User;
+  dislikesCount?: number;
+  lastUpdateDate?: string;
+  likesCount?: number;
+  pinned?: boolean;
   post_id?: number;
   topic?: Topic;
+  voteCount?: number;
 }

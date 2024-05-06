@@ -1,0 +1,10 @@
+<li class="comment">
+  <p>{{ comment.content }}</p>
+  <!-- Display other comment properties as needed -->
+  <ul *ngIf="comment.nestedComments && comment.nestedComments.length" class="nested-comments">
+    <!-- Iterate over nested comments -->
+    <li *ngFor="let nestedComment of comment.nestedComments" class="comment">
+      <app-comment [comment]="nestedComment"></app-comment> <!-- Recursive component -->
+    </li>
+  </ul>
+</li>
