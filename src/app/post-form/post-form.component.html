@@ -1,11 +1,34 @@
-<form (ngSubmit)="submitForm()">
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input type="text" class="form-control" id="title" name="title" [(ngModel)]="post.title" required>
+<div class="page-container">
+  <div class="background-shape bg-dark"></div>
+  <br><br><br>  <br><br><br>
+  <div class="form-container">
+
+    <h2 class="form-title">Create New Post</h2>
+    <form (ngSubmit)="submitForm()" class="post-form">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <div class="input-container">
+          <input type="text" class="form-input" id="title" name="title" [(ngModel)]="post.title" required>
+          <svg width="16" height="16" viewBox="0 0 16 16" class="icon">
+            <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zM13.5 5.5l-2.5 2.5-7-7 2.5-2.5L12 3.5 13.5 5.5z" />
+          </svg>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea class="form-input" id="content" name="content" [(ngModel)]="post.content" required></textarea>
+      </div>
+      <br>
+      <div class="button-container">
+        <button class="btn btn-secondary" (click)="goToPostPage()">Go Back</button><span style="margin-left: 230px;"></span> <!-- Adding spacing -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+          <app-pop-up *ngIf="postAdded"></app-pop-up>
+      </div>
+    </form>
+    <div class="success-popup hidden" id="success-popup">
+      <p>Post added successfully!</p>
+      <button class="close-btn" (click)="closePopup()">Close</button>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="content">Content</label>
-    <textarea class="form-control" id="content" name="content" [(ngModel)]="post.content" required></textarea>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+
+</div>

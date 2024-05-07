@@ -1,14 +1,45 @@
-<br>
-<div class="row">
-  <div class="col-md-4 mb-4" *ngFor="let t of topics">
-    <div class="card border-0 rounded-lg shadow-lg" style="background-color: #f5f5f5;">
-
-      <div class="card-body py-4 px-3">
-        <h5 class="card-title text-dark font-weight-bold">{{ t.title }}</h5>
-        <p class="card-text text-muted">{{ t.createdAt }}</p>
-        <a href="#" class="btn btn-primary rounded-pill" [routerLink]="['/post-page', t.topic_id]">Check Topic</a>
+<body>
+<div class="page-container bg-dark text-white">
+  <div class="background-shapes">
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+  </div>
+  <br><br>
+  <div class="container">
+    <div class="row">
+      <!-- Display  -->
+      <div class="col-md-4 mb-4" *ngFor="let t of topics">
+        <div class="card border-0 rounded-lg shadow-lg custom-card text-white">
+          <div class="card-body py-4 px-3">
+            <h5 class="card-title font-weight-bold text-white">{{ t.title }}</h5>
+            <p class="card-text text-white">{{ t.createdAt }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="#" class="btn btn-secondary rounded-pill" [routerLink]="['/post-page', t.topic_id]">Check
+                Topic</a>
+              <button type="button" class="btn btn-danger rounded-pill mr-2" (click)="deleteTopic(t)">Delete
+                Topic</button>
+              <a href="#" class="btn btn-primary rounded-pill">Update Topic</a>
+            </div>
+          </div>
+        </div>
       </div>
 
+      <!-- Add Topic Button -->
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 rounded-lg shadow-lg custom-card text-center">
+          <div class="card-body py-4">
+            <h5 class="card-title font-weight-bold text-white plus-icon"><i class="fas fa-plus"></i></h5>
+            <a routerLink="/topic-form" class="btn add-topic-btn rounded-pill mt-3 text-white">Add Topic</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Wavy Shape -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" class="wavy-shape">
+    <path fill="#c14047" fill-opacity="1" d="M0,256L48,218.7C96,181,192,107,288,90.7C384,75,480,117,576,144C672,171,768,181,864,170.7C960,160,1056,128,1152,133.3C1248,139,1344,181,1392,202.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+  </svg>
 </div>
+</body>

@@ -9,4 +9,9 @@
   border-color: #bd2130; /* Darker red color on hover */
 }
 .carousel-custom-height
-{ height: 600px}
+{ height: 850px}
+
+.py-5 {
+  padding-top: 8rem !important;
+  padding-bottom: 3rem !important;
+}

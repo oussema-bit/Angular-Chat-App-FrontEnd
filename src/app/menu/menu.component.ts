@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import { ForumControllerService } from '../services/rym-service/services/forum-controller.service';
 import {ForumComponent} from "../forum/forum.component";
+import {HelperService} from "../services/helper/helper-service.service";
 
 @Component({
   selector: 'app-menu',
@@ -11,12 +12,15 @@ import {ForumComponent} from "../forum/forum.component";
 export class MenuComponent implements OnInit {
   @ViewChild(ForumComponent) forumComponent: ForumComponent | undefined;
 
-  constructor(private router: Router) {
+  constructor(private router: Router ,   private cdRef: ChangeDetectorRef,
+              private jwtHelper:HelperService) {
   }
 
   showForums: boolean = false;
+  userDetails:string[]=[]
 
   ngOnInit() {
+    this.userDetails=this.jwtHelper.userRolesNames
   }
 
 

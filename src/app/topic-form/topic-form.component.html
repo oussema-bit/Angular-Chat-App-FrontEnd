@@ -1,0 +1,34 @@
+<div class="page-container">
+  <div class="background-shape bg-dark"></div>
+  <br><br><br>  <br><br><br>
+  <div class="form-container">
+    <h2 class="form-title">Create New Topic</h2>
+    <form (ngSubmit)="submitForm()" class="topic-form">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <div class="input-container">
+          <input type="text" class="form-input" id="title" name="title" [(ngModel)]="newTopic.title" required>
+        </div>
+      </div>
+      <!-- Optionally display current date -->
+      <div class="form-group">
+        <label for="created_at">Creation Date</label>
+        <div class="input-container">
+          <input type="text" class="form-input" id="created_at" name="created_at" [value]="newTopic.createdAt" >
+        </div>
+      </div>
+      <!-- Add other fields for the topic as needed -->
+      <br>
+      <div class="button-container">
+        <!-- You might not need to navigate back to a topic list with a specific ID after creating a new topic -->
+        <button class="btn btn-secondary" (click)="goToTopicList()">Go Back</button>
+        <span style="margin-left: 190px;"></span> <!-- Adding spacing -->
+        <button type="submit" class="btn btn-primary">Create Topic</button>
+      </div>
+    </form>
+    <div class="success-popup hidden" id="success-popup">
+      <p>Topic created successfully!</p>
+      <button class="close-btn" (click)="closePopup()">Close</button>
+    </div>
+  </div>
+</div>

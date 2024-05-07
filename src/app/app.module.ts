@@ -14,6 +14,8 @@ import { PostComponent } from './post/post.component';
 import { PostFormComponent } from './post-form/post-form.component';
 import {FormsModule} from "@angular/forms";
 import {NgOptimizedImage} from "@angular/common";
+import { TopicFormComponent } from './topic-form/topic-form.component';
+import { PopUpComponent } from './pop-up/pop-up.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import {NgOptimizedImage} from "@angular/common";
     TopicListComponent,
     CommentComponent,
     PostComponent,
-    PostFormComponent
+    PostFormComponent,
+    TopicFormComponent,
+    PopUpComponent
   ],
   imports: [
     BrowserModule,
