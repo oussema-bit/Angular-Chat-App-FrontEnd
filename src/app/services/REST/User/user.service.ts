@@ -32,7 +32,7 @@ export class UserService {
             'userToken',
             <string>reponse.jwt
           );
-          this.router.navigate(['home']);
+          this.router.navigate(['contest-page']);
         },
         error:()=> console.log("Login failed!!")
       })
