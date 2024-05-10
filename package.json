@@ -9,7 +9,9 @@
     "test": "ng test",
     "api-gen-bal-de-projet": "ng-openapi-gen --input ./src/app/swagger/swagger-radhouene.json --output src/app/services/radhouene/",
     "api-gen-ahmed": "ng-openapi-gen --input ./src/app/swagger/swagger-ahmed.json --output src/app/services/Role/",
-    "maryem-api-gen": "ng-openapi-gen --input ./src/app/swagger/swagger-maryem.json --output ./src/app/services/maryem-services"
+    "maryem-api-gen": "ng-openapi-gen --input ./src/app/swagger/swagger-maryem.json --output ./src/app/services/maryem-services",
+    "OrderMail-api-gen": "ng-openapi-gen --input ./src/app/swagger/swagger-OrderMail.json --output ./src/app/services/MailOrder-services"
+
   },
   "private": true,
   "dependencies": {

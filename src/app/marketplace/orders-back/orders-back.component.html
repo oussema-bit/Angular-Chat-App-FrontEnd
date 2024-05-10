@@ -1,28 +1,29 @@
 
 <div class="container">
-    <h2>All Orders</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Customer Name</th>
-          <th>Order Status</th>
-          <th>Payment Method</th>
-          <th>Total Price</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let order of orders">
-          <td>{{ order.id }}</td>
-          <td>{{ getCustomerFullName(order.customer) }}</td>
-          <td>{{ order.orderStatus }}</td>
-          <td>{{ order.paymentMethod }}</td>
-          <td>{{ getTotalOrderPrice(order) }}</td>
-          <td>
-            <button class="btn btn-primary" >Send Confirmation Email</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <h2>All Orders</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Customer Name</th>
+        <th>Order Status</th>
+        <th>Payment Method</th>
+        <th>Total Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.id }}</td>
+        <td>{{ getCustomerFullName(order.customer) }}</td>
+        <td>{{ order.orderStatus }}</td>
+        <td>{{ order.paymentMethod }}</td>
+        <td>{{ getTotalOrderPrice(order) }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="order.customer && order.customer.email && sendConfirmationEmail(order.customer.email)">Send Confirmation Email</button>
+        </td>
+        
+      </tr>
+    </tbody>
+  </table>
 </div>

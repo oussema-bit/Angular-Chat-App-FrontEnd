@@ -57,16 +57,16 @@ export class CartComponent implements OnInit {
   
   
 
- getTotalSum(): number {
-  if (!this.cartItems) {
-    return 0;
+  getTotalSum(): number {
+    if (!this.cartItems) {
+      return 0;
+    }
+  
+    return this.cartItems.reduce((sum, item) => {
+      const itemPrice = item.price ?? 0; // Get the price of the item
+      return sum + itemPrice; // Add the price to the sum
+    }, 0);
   }
-
-  return this.cartItems.reduce((sum, item) => {
-    const itemTotal = (item.price ?? 0) * (item.quantity ?? 1); // Multiply price by quantity
-    return sum + itemTotal;
-  }, 0);
-}
 
   orderNoww(): void {
     // Prepare the parameters for createOrder function

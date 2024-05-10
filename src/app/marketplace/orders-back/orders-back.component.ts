@@ -3,6 +3,8 @@ import { Order } from '../../services/maryem-services/models/order';
 import { OrderControllerService } from '../../services/maryem-services/services/order-controller.service';
 import { Customer } from '../../services/maryem-services/models/customer';
 import { CartItem } from '../../services/maryem-services/models/cart-item';
+import { MailOrderService } from '../../services/MailOrder-services/services/mail-order.service';
+import { Sendmail$Params } from 'src/app/services/MailOrder-services/fn/mail-order/sendmail';
 
 @Component({
   selector: 'app-orders-back',
@@ -13,7 +15,9 @@ export class OrdersBackComponent implements OnInit {
   orders: Order[] = [];
   assetsImagePath = '/assets/images/';
 
-  constructor(private orderService: OrderControllerService) { }
+  constructor(private orderService: OrderControllerService,
+    private mailService: MailOrderService
+  ) { }
 
   ngOnInit(): void {
     this.loadOrders();
@@ -58,4 +62,22 @@ export class OrdersBackComponent implements OnInit {
       return sum + itemTotal;
     }, 0);
   }
+
+  sendConfirmationEmail(customerEmail: string) {
+    const params: Sendmail$Params = {
+      email: customerEmail
+    };
+  
+    this.mailService.sendmail(params).subscribe(
+      () => {
+        console.log('Confirmation email sent successfully');
+        // You can add any further logic here, such as showing a success message to the user
+      },
+      (error) => {
+        console.error('Error sending confirmation email:', error);
+        // Handle the error, such as showing an error message to the user
+      }
+    );
+  }
+
 }
