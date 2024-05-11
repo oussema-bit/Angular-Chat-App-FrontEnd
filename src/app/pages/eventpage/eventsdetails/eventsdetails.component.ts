@@ -33,8 +33,6 @@ export class EventsdetailsComponent implements OnInit {
   users: User[] = [];
   user!:User
   title = 'My first AGM project';
-  lat !:any;
-  lng!:any;
   constructor(private act: ActivatedRoute,private groupService:GroupControllerService, private eventService: EventControllerService,private userService:UserControllerService ,private route: Router) {
   }
 
@@ -53,7 +51,6 @@ export class EventsdetailsComponent implements OnInit {
     };
     this.eventService.getEventById(params).subscribe((data) => {
         this.event= data
-      this.Setupmap();
       this.FetchGroups();
       this.FetchUsers();
       }
@@ -78,10 +75,7 @@ export class EventsdetailsComponent implements OnInit {
 
     //window.location.reload()
   }
-  Setupmap(){
-    this.lat = this.event.lattitude;
-    this.lng = this.event.longitude;
-  }
+
   FetchGroups(){
     this.groupService.getAllGroups().subscribe((data)=>{
       this.groups=data

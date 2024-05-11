@@ -37,8 +37,6 @@ import { EventsComponent } from './pages/eventpage/events/events.component';
 import { EventsdetailsComponent } from './pages/eventpage/eventsdetails/eventsdetails.component';
 import {NgOptimizedImage} from "@angular/common";
 import { ServiceWorkerModule } from '@angular/service-worker';
-import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
-import {AgmCoreModule} from "@druk/agm-core";
 
 
 const socketConfig:SocketIoConfig={
@@ -84,11 +82,7 @@ const socketConfig:SocketIoConfig={
         SocketIoModule.forRoot(socketConfig),
         NbChatModule,
         BrowserAnimationsModule, NoopAnimationsModule, ReactiveFormsModule,
-        SweetAlert2Module.forRoot(),
         LayoutModule,
-      AgmCoreModule.forRoot({
-        apiKey: 'AIzaSyCZ8-b4aGYLmIYlq-Ksk5Dg7kyB3KzFrHg'
-      }),
       NgOptimizedImage, ServiceWorkerModule.register('ngsw-worker.js', {
   enabled: !isDevMode(),
   // Register the ServiceWorker as soon as the application is stable
