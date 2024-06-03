@@ -1,19 +1,11 @@
 pipeline {
     agent any
     stages {
-        stage('Installing packages') {
-            steps {
-              echo "Running npm install .."
-              sh '''
-              npm install
-              '''
-            }
-        }
-        stage('Build') {
+        stage('Build frontend image') {
             steps {
                 echo "Building.."
                 sh '''
-                echo "doing build stuff.."
+                docker build -t frontend .
                 '''
             }
         }
