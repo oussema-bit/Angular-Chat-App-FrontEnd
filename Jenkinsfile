@@ -1,11 +1,11 @@
 pipeline {
     agent any
     stages {
-        stage('Build frontend image') {
+        stage('Build frontend docker image') {
             steps {
                 echo "Building.."
                 sh '''
-                ping -c4 8.8.8.8
+                docker build -t frontend:1.0.0 .
                 '''
             }
         }
