@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo "Building.."
                 sh '''
-                ping 8.8.8.8
+                ping -c4 8.8.8.8
                 '''
             }
         }
