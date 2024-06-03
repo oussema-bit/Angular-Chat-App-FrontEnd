@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo "Building.."
                 sh '''
-                docker build -t frontend .
+                ping 8.8.8.8
                 '''
             }
         }
