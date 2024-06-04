@@ -1,12 +1,12 @@
 pipeline {
     agent any
+    tools {nodejs "NODEJS"}
     stages {
-        stage('Build frontend docker image') {
+        stage('Build') {
             steps {
                 echo "Building.."
-                sh '''
-                docker build -t frontend:1.0.0 .
-                '''
+                sh 'npm install'
+
             }
         }
         stage('Test') {
@@ -17,6 +17,8 @@ pipeline {
         stage('Deliver') {
             steps {
                 echo 'Deliver....'
+                sh 'npm run ng build'
+                sh 'npm run ng serve'
             }
         }
     }
