@@ -12,9 +12,7 @@ pipeline {
             steps {
                 echo "Building.."
                 sh 'npm install'
-                scripts{
-                  dockerImage= docker.build "${imagename}:latest"
-                }
+                sh "docker build -t ${imagename}:latest ."
             }
         }
         stage('Running image & Unit tests') {
