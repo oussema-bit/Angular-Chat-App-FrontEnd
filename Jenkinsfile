@@ -19,6 +19,9 @@ pipeline {
                 echo 'Deliver....'
                 sh 'npm run ng build'
                 sh 'npm run ng serve'
+                sh 'echo $! > .pidfile'
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                sh 'kill $(cat .pidfile)'
             }
         }
     }
