@@ -3,6 +3,7 @@ pipeline {
     tools {
       nodejs "NODEJS"
       maven "maven-spring-backend"
+      sonar "sonar-qube-jenkins"
     }
     environment {
             imagename = "oussamaayari2020/my_first_frontend_job"
@@ -12,12 +13,11 @@ pipeline {
     }
     stages {
         stage('Build') {
-            def scannerHome = tool 'SonarScanner';
             steps {
                 echo "Building.."
                 sh 'npm install'
                 withSonarQubeEnv(installationName:"sonar-qube-jenkins") {
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    sh "sonar-scanner"
                 }
                 sh "docker build -t ${imagename}:latest ."
             }
