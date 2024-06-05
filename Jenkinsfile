@@ -1,33 +1,25 @@
-/*pipeline {
+pipeline {
     agent any
     tools {
       nodejs "NODEJS"
       maven "maven-spring-backend"
+      SonarScanner "sonar-qube-jenkins"
     }
     environment {
             imagename = "oussamaayari2020/my_first_frontend_job"
             dockerImage = ''
             containerName = 'my-frontend-container'
             dockerHubCredentials = 'admin'
-    }*/
-    node {
-      stage('SCM') {
-        checkout scm
-      }
-      stage('SonarQube Analysis') {
-        def scannerHome = tool 'sonar-qube-jenkins';
-        withSonarQubeEnv(installationName:"sonar-qube-jenkins") {
-          sh "${scannerHome}/bin/sonar-scanner"
-        }
-      }
     }
-    /*stages {
+
+    stages {
+        def scannerHome = tool 'SonarScanner';
         stage('Build') {
             steps {
                 echo "Building.."
                 sh 'npm install'
-                withSonarQubeEnv(installationName:"sonar-qube-jenkins") {
-                    sh "sonar-scanner"
+                withSonarQubeEnv() {
+                    sh "${scannerHome}/bin/sonar-scanner"
                 }
                 sh "docker build -t ${imagename}:latest ."
             }
@@ -71,12 +63,8 @@
         stage('Deliver') {
             steps {
                 echo 'Deliver....'
-                sh 'chmod -R +rwx ./jenkins/scripts/deliver.sh'
-                sh 'chmod -R +rwx ./jenkins/scripts/kill.sh'
-                sh './jenkins/scripts/deliver.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './jenkins/scripts/kill.sh'
+
             }
         }
     }
-}*/
+}
