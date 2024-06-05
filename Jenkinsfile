@@ -12,11 +12,12 @@ pipeline {
     }
     stages {
         stage('Build') {
+            def scannerHome = tool 'SonarScanner';
             steps {
                 echo "Building.."
                 sh 'npm install'
                 withSonarQubeEnv(installationName:"sonar-qube-jenkins") {
-                    sh "sonar-scanner"
+                    sh "${scannerHome}/bin/sonar-scanner"
                 }
                 sh "docker build -t ${imagename}:latest ."
             }
