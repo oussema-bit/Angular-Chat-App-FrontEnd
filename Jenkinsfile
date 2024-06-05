@@ -3,7 +3,7 @@ pipeline {
     tools {
       nodejs "NODEJS"
       maven "maven-spring-backend"
-      SonarScanner "sonar-qube-jenkins"
+      sonarqube "sonar-qube-jenkins"
     }
     environment {
             imagename = "oussamaayari2020/my_first_frontend_job"
