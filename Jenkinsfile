@@ -15,11 +15,13 @@ pipeline {
             steps {
                 echo "Building.."
                 sh 'npm install'
-                def scannerHome = tool 'sonar-qube-jenkins';
-                withSonarQubeEnv() {
-                   sh "${scannerHome}/bin/sonar-scanner"
-                }
                 sh "docker build -t ${imagename}:latest ."
+            }
+        }
+        stage('SonarQube Analysis') {
+            def scannerHome = tool 'sonar-qube-jenkins';
+            withSonarQubeEnv() {
+              sh "${scannerHome}/bin/sonar-scanner"
             }
         }
         stage('Running image & Unit tests') {
