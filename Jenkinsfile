@@ -1,4 +1,4 @@
-pipeline {
+/*pipeline {
     agent any
     tools {
       nodejs "NODEJS"
@@ -9,7 +9,7 @@ pipeline {
             dockerImage = ''
             containerName = 'my-frontend-container'
             dockerHubCredentials = 'admin'
-    }
+    }*/
     node {
       stage('SCM') {
         checkout scm
@@ -21,14 +21,14 @@ pipeline {
         }
       }
     }
-    stages {
+    /*stages {
         stage('Build') {
             steps {
                 echo "Building.."
                 sh 'npm install'
-                /*withSonarQubeEnv(installationName:"sonar-qube-jenkins") {
+                withSonarQubeEnv(installationName:"sonar-qube-jenkins") {
                     sh "sonar-scanner"
-                }*/
+                }
                 sh "docker build -t ${imagename}:latest ."
             }
         }
@@ -79,4 +79,4 @@ pipeline {
             }
         }
     }
-}
+}*/
