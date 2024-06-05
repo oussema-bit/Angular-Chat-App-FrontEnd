@@ -15,8 +15,9 @@ pipeline {
             steps {
                 echo "Building.."
                 sh 'npm install'
-                withSonarQubeEnv(installationName:"sonar-qube-jenkins") {
-                    sh "mvn clean verify sonar:sonar -Dsonar.token=squ_991f197778a5e726b4f0bedbbf62564a834926a6 -Dsonar.projectKey=my_first_scan -Dsonar.projectName='my_first_scan'"
+                def scannerHome = tool 'sonar-qube-jenkins';
+                withSonarQubeEnv() {
+                   sh "${scannerHome}/bin/sonar-scanner"
                 }
                 sh "docker build -t ${imagename}:latest ."
             }
