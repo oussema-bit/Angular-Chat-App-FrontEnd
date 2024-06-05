@@ -1,7 +1,9 @@
 pipeline {
     agent any
-    tools {nodejs "NODEJS"}
-    tools {maven "maven-spring-backend"}
+    tools {
+      nodejs "NODEJS"
+      maven "maven-spring-backend"
+    }
     environment {
             imagename = "oussamaayari2020/my_first_frontend_job"
             dockerImage = ''
