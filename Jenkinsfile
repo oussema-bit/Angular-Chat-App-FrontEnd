@@ -3,7 +3,6 @@ pipeline {
     tools {
       nodejs "NODEJS"
       maven "maven-spring-backend"
-      dockerTool "DOCKER"
     }
     environment {
             imagename = "oussamaayari2020/my_first_frontend_job"
@@ -17,9 +16,7 @@ pipeline {
             steps {
                 echo "Building.."
                 sh 'npm install'
-                container('docker'){
-                  sh "docker build -t ${imagename}:latest ."
-                }
+                sh "docker build -t ${imagename}:latest ."
             }
         }
 
