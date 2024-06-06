@@ -3,7 +3,7 @@ pipeline {
     tools {
       nodejs "NODEJS"
       maven "maven-spring-backend"
-      docker "DOCKER"
+      dockerTool "DOCKER"
     }
     environment {
             imagename = "oussamaayari2020/my_first_frontend_job"
