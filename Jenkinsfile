@@ -17,8 +17,9 @@ pipeline {
             steps {
                 echo "Building.."
                 sh 'npm install'
-
-                sh "docker build -t ${imagename}:latest ."
+                container('docker'){
+                  sh "docker build -t ${imagename}:latest ."
+                }
             }
         }
 
