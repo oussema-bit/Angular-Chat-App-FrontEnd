@@ -38,6 +38,7 @@ import { EventsdetailsComponent } from './pages/eventpage/eventsdetails/eventsde
 import {NgOptimizedImage} from "@angular/common";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { UploadVideoComponent } from './upload-video/upload-video.component';
+import { VideoDetailsComponent } from './pages/video-details/video-details.component';
 
 
 const socketConfig:SocketIoConfig={
@@ -67,7 +68,8 @@ const socketConfig:SocketIoConfig={
     LoadingMessageComponent,
     EventsComponent,
     EventsdetailsComponent,
-    UploadVideoComponent
+    UploadVideoComponent,
+    VideoDetailsComponent
   ],
     imports: [
         BrowserModule,

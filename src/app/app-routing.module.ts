@@ -17,6 +17,7 @@ import {ForgotPasswordComponent} from "./pages/forgot-password/forgot-password.c
 import {EventsComponent} from "./pages/eventpage/events/events.component";
 import {EventsdetailsComponent} from "./pages/eventpage/eventsdetails/eventsdetails.component";
 import {UploadVideoComponent} from "./upload-video/upload-video.component";
+import {VideoDetailsComponent} from "./pages/video-details/video-details.component";
 
 
 
@@ -36,6 +37,9 @@ const routes:Routes=[
   {
     path:'upload-video',
     component: UploadVideoComponent
+  },
+  { path: 'video/:id',
+    component: VideoDetailsComponent
   },
   {
     path:'signup',
