@@ -1,0 +1,35 @@
+<div class="select-container">
+  <select (change)="handleNiveauChange($event)" class="dark-select">
+    <option value="">Select Niveau</option>
+    <option *ngFor="let level of niveau | enumToArray" [value]="level">{{ level }}</option>
+  </select>
+
+  <select (change)="handleVisibilityChange($event)" class="dark-select">
+    <option value="">Select Visibility</option>
+    <option *ngFor="let vis of visibility | enumToArray" [value]="vis">{{ vis }}</option>
+  </select>
+
+  <select (change)="handleOptionChange($event)" class="dark-select">
+    <option value="">Select Option</option>
+    <option *ngFor="let option of optionEnum | enumToArray" [value]="option">{{ option }}</option>
+  </select>
+</div>
+
+<div class="video-grid">
+  <div *ngFor="let video of paginatedVideos" class="video-card" (click)="goToVideoDetails(video.videoId)">
+    <div class="video-title">{{ video.videoTitle }}</div>
+    <div class="video-description">{{ video.videoDescription }}</div>
+    <video width="640" height="240" controls *ngIf="video.videoUrl">
+      <source [src]="video.videoUrl" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+<div class="pagination-controls">
+  <button (click)="currentPage = 1; paginate()" [disabled]="currentPage === 1">First</button>
+  <button (click)="currentPage = currentPage - 1; paginate()" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ pagesNumber  }}</span>
+  <button (click)="currentPage = currentPage + 1; paginate()" [disabled]="currentPage >= totalItems / itemsPerPage">Next</button>
+  <button (click)="currentPage = (pagesNumber); paginate()" [disabled]="currentPage >= totalItems / itemsPerPage">Last</button>
+</div>

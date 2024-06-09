@@ -37,8 +37,10 @@ import { EventsComponent } from './pages/eventpage/events/events.component';
 import { EventsdetailsComponent } from './pages/eventpage/eventsdetails/eventsdetails.component';
 import {NgOptimizedImage} from "@angular/common";
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { UploadVideoComponent } from './upload-video/upload-video.component';
+import { UploadVideoComponent } from './pages/upload-video/upload-video.component';
 import { VideoDetailsComponent } from './pages/video-details/video-details.component';
+import { VideoListComponent } from './pages/video-list/video-list.component';
+import { EnumToArrayPipe } from './services/farouk/enum-to-array.pipe';
 
 
 const socketConfig:SocketIoConfig={
@@ -69,7 +71,9 @@ const socketConfig:SocketIoConfig={
     EventsComponent,
     EventsdetailsComponent,
     UploadVideoComponent,
-    VideoDetailsComponent
+    VideoDetailsComponent,
+    VideoListComponent,
+    EnumToArrayPipe
   ],
     imports: [
         BrowserModule,
