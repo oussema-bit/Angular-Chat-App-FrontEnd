@@ -1,0 +1,32 @@
+.dark-mode-container {
+  background-color: #121212;
+  color: #ffffff;
+  padding: 20px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+.video-container {
+  background-color: #3b3b3b;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px;
+}
+
+video {
+  width: 100%;
+  max-height: 600px;
+}
+
+.video-info {
+  margin-top: 20px;
+}
+
+.tag {
+  display: inline-block;
+  background: #01adb2;
+  color: #fff;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+}

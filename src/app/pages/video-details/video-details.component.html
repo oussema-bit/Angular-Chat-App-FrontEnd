@@ -1,0 +1,18 @@
+<div class="dark-mode-container">
+  <div class="container">
+    <div *ngIf="video" class="video-container">
+      <video controls autoplay>
+        <source [src]="video.videoUrl" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-info">
+        <h2>{{ video.videoTitle }}</h2>
+        <p>{{ video.videoDescription }}</p>
+        <p>Likes: {{ video.videoLikes }}, Dislikes: {{ video.videoDislikes }}</p>
+        <div class="tags">
+          <span class="tag" *ngFor="let tag of tagsArray">{{ tag }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
