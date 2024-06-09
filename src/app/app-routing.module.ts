@@ -19,6 +19,7 @@ import {EventsdetailsComponent} from "./pages/eventpage/eventsdetails/eventsdeta
 import {UploadVideoComponent} from "./pages/upload-video/upload-video.component";
 import {VideoDetailsComponent} from "./pages/video-details/video-details.component";
 import {VideoListComponent} from "./pages/video-list/video-list.component";
+import {VideoComponent} from "./pages/video/video.component";
 
 
 
@@ -38,6 +39,10 @@ const routes:Routes=[
   {
     path:'upload-video',
     component: UploadVideoComponent
+  },
+  {
+    path:'video',
+    component: VideoComponent
   },
   {
     path:'video-list',

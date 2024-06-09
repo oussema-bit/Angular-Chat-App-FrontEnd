@@ -1,0 +1,7 @@
+<div class="dark-mode-container">
+  <button *ngIf="viewMode === 'list'" (click)="setViewMode('upload')">Upload Video</button>
+
+  <app-upload-video *ngIf="viewMode === 'upload'" (videoUploaded)="handleVideoUploaded($event)"></app-upload-video>
+  <app-video-details-form *ngIf="viewMode === 'details' && videoUrl" [videoUrl]="videoUrl" (changeView)="setViewMode($event)"></app-video-details-form>
+  <app-video-list *ngIf="viewMode === 'list'"></app-video-list>
+</div>

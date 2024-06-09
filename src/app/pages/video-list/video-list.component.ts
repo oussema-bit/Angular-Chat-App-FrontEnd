@@ -10,17 +10,21 @@ import {Niveau, OptionEnum, Visible} from "../../models/video-enums";
   styleUrls: ['./video-list.component.scss']
 })
 export class VideoListComponent implements OnInit {
+  originalVideos: Video[] = []; // To hold the original unfiltered videos
   videos: Video[] = [];
   niveau = Niveau;
   visibility = Visible;
   optionEnum = OptionEnum;
   paginatedVideos: Video[] = [];
   currentPage: number = 1;
-  itemsPerPage: number = 3;  // Adjust as needed
+  itemsPerPage: number = 3;
   totalItems: number = 0;
   pagesNumber: number = 0;
-  constructor(private videoService: VideoService,private router: Router ) {}
+  selectedNiveau: string = '';
+  selectedVisibility: string = '';
+  selectedOption: string = '';
 
+  constructor(private videoService: VideoService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchVideos();
@@ -29,46 +33,57 @@ export class VideoListComponent implements OnInit {
   fetchVideos(): void {
     this.videoService.findAllVideos().subscribe({
       next: (videos) => {
+        this.originalVideos = videos;
         this.videos = videos;
         this.totalItems = videos.length;
-        if (this.totalItems % this.itemsPerPage === 0) {
-          this.pagesNumber = this.totalItems / this.itemsPerPage;
-        }else {
-          this.pagesNumber = Math.floor(this.totalItems / this.itemsPerPage) + 1;
-        }
+        this.pagesNumber = Math.ceil(this.totalItems / this.itemsPerPage);
         this.paginate();
       },
       error: (err) => console.error('Failed to load videos', err)
     });
   }
+
   paginate(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
     this.paginatedVideos = this.videos.slice(startIndex, endIndex);
   }
-  handleNiveauChange(event: Event) {
+
+  handleNiveauChange(event: Event): void {
     const element = event.target as HTMLSelectElement;
-    const niveau = element.value;
-    this.videoService.findVideosByNiveau(niveau).subscribe(data => {
-      this.videos = data;
-    });
+    this.selectedNiveau = element.value;
+    this.applyFilters();
   }
 
-  handleVisibilityChange(event: Event) {
+  handleVisibilityChange(event: Event): void {
     const element = event.target as HTMLSelectElement;
-    const visibility = element.value;
-    this.videoService.findVideosByVisibility(visibility).subscribe(data => {
-      this.videos = data;
-    });
+    this.selectedVisibility = element.value;
+    this.applyFilters();
   }
 
-  handleOptionChange(event: Event) {
+  handleOptionChange(event: Event): void {
     const element = event.target as HTMLSelectElement;
-    const option = element.value;
-    this.videoService.findVideosByOption(option).subscribe(data => {
-      this.videos = data;
-    });
+    this.selectedOption = element.value;
+    this.applyFilters();
   }
+
+  applyFilters(): void {
+    let filteredVideos = this.originalVideos;
+    if (this.selectedNiveau) {
+      filteredVideos = filteredVideos.filter(v => v.niveau === this.selectedNiveau);
+    }
+    if (this.selectedVisibility) {
+      filteredVideos = filteredVideos.filter(v => v.visibility === this.selectedVisibility);
+    }
+    if (this.selectedOption) {
+      filteredVideos = filteredVideos.filter(v => v.option === this.selectedOption);
+    }
+    this.videos = filteredVideos;
+    this.totalItems = this.videos.length;
+    this.pagesNumber = Math.ceil(this.totalItems / this.itemsPerPage);
+    this.paginate();
+  }
+
 
   goToVideoDetails(videoId: number): void {
     this.router.navigate(['/video', videoId]);
