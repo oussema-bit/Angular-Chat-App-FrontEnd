@@ -1,0 +1,169 @@
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  padding: 20px;
+  justify-content: center;
+
+  @media (max-width: 1500px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.video-card {
+  background-color: #3d3939;
+  color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  width: calc(100% - 32px);
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    transform: scale(1.05);
+    background-color: #484545;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 223, 0, 0.6), transparent 70%);
+    animation: rotate 6s linear infinite;
+  }
+
+    .video-title, .video-description {
+      animation: pulse 1s infinite;
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      color: #ffffff;
+    }
+    50% {
+      color: #FFD700;
+    }
+  }
+}
+
+.video-title, .video-description {
+  text-align: center;
+  margin: 8px 0;
+  transition: color 0.3s ease;
+}
+
+video {
+  width: 100%;
+  height: auto;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-5px);
+  }
+}
+
+
+.select-container {
+  display: flex;
+  flex-direction: row; // Align items in a row
+justify-content: space-around; // Distribute space around items
+padding: 10px; // Padding around the container
+gap: 10px; // Space between select elements
+}
+
+
+select {
+  width: 30%;
+max-width: 200px;
+min-width: 150px;
+background-color: #333;
+color: white;
+padding: 10px;
+  border: none;
+  border-radius: 5px;
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+&:hover, &:focus {
+  background-color: #444;
+outline: none;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+// Style for when the select is expanded (focus)
+&:focus {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.75);
+}
+}
+
+
+@media (max-width: 600px) {
+  .select-container {
+    flex-direction: column;
+  align-items: center;
+  }
+
+  select {
+    width: 80%;
+  }
+}
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+
+    &:hover, &:focus {
+      background-color: #444;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    &:disabled {
+      background-color: #555;
+      color: #777;
+      cursor: not-allowed;
+      transform: none;
+    box-shadow: none;
+    }
+  }
+}

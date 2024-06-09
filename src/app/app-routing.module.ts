@@ -16,8 +16,9 @@ import {RoleComponent} from "./pages/role/role.component";
 import {ForgotPasswordComponent} from "./pages/forgot-password/forgot-password.component";
 import {EventsComponent} from "./pages/eventpage/events/events.component";
 import {EventsdetailsComponent} from "./pages/eventpage/eventsdetails/eventsdetails.component";
-import {UploadVideoComponent} from "./upload-video/upload-video.component";
+import {UploadVideoComponent} from "./pages/upload-video/upload-video.component";
 import {VideoDetailsComponent} from "./pages/video-details/video-details.component";
+import {VideoListComponent} from "./pages/video-list/video-list.component";
 
 
 
@@ -37,6 +38,10 @@ const routes:Routes=[
   {
     path:'upload-video',
     component: UploadVideoComponent
+  },
+  {
+    path:'video-list',
+    component: VideoListComponent
   },
   { path: 'video/:id',
     component: VideoDetailsComponent
