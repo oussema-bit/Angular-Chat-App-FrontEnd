@@ -16,6 +16,8 @@ import {RoleComponent} from "./pages/role/role.component";
 import {ForgotPasswordComponent} from "./pages/forgot-password/forgot-password.component";
 import {EventsComponent} from "./pages/eventpage/events/events.component";
 import {EventsdetailsComponent} from "./pages/eventpage/eventsdetails/eventsdetails.component";
+import {UploadVideoComponent} from "./upload-video/upload-video.component";
+
 
 
 const routes:Routes=[
@@ -30,6 +32,10 @@ const routes:Routes=[
   {
     path:'home',
     component:MyFirstCompComponent
+  },
+  {
+    path:'upload-video',
+    component: UploadVideoComponent
   },
   {
     path:'signup',
