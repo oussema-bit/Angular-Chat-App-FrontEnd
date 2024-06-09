@@ -1,0 +1,25 @@
+<div class="upload-page-container">
+  <div class="upload-section" fxLayout="column" fxLayoutGap="20px">
+    <div class="file-upload-container"
+         (drop)="onDrop($event)"
+         (dragover)="onDragOver($event)"
+         (dragleave)="onDragLeave($event)"
+         (click)="triggerFileUpload()"
+         [class.drag-over]="isDragOver"
+         [class.uploading]="uploadProgress">
+      <p>Drag and drop a file here, or click to select a file</p>
+      <input type="file" (change)="onFileSelect($event)" #fileInput style="display:none;">
+    </div>
+    <div *ngIf="selectedFile">
+      <span>Selected file: {{ selectedFile.name }}</span>
+      <button class="upload-btn" (click)="uploadFiles([selectedFile])">Upload</button>
+    </div>
+    <div *ngIf="isUploading">
+      <p>Uploading... {{ uploadProgress }}%</p>
+      <div class="spinner"></div>
+    </div>
+    <div *ngIf="showDetailsForm">
+      <h1>Details Form</h1>
+    </div>
+  </div>
+</div>

@@ -37,6 +37,7 @@ import { EventsComponent } from './pages/eventpage/events/events.component';
 import { EventsdetailsComponent } from './pages/eventpage/eventsdetails/eventsdetails.component';
 import {NgOptimizedImage} from "@angular/common";
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { UploadVideoComponent } from './upload-video/upload-video.component';
 
 
 const socketConfig:SocketIoConfig={
@@ -65,7 +66,8 @@ const socketConfig:SocketIoConfig={
     ForgotPasswordComponent,
     LoadingMessageComponent,
     EventsComponent,
-    EventsdetailsComponent
+    EventsdetailsComponent,
+    UploadVideoComponent
   ],
     imports: [
         BrowserModule,
