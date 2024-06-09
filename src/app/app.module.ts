@@ -41,6 +41,11 @@ import { UploadVideoComponent } from './pages/upload-video/upload-video.componen
 import { VideoDetailsComponent } from './pages/video-details/video-details.component';
 import { VideoListComponent } from './pages/video-list/video-list.component';
 import { EnumToArrayPipe } from './services/farouk/enum-to-array.pipe';
+import { VideoComponent } from './pages/video/video.component';
+import { VideoDetailsFormComponent } from './pages/video-details-form/video-details-form.component';
+import {MatInputModule} from "@angular/material/input";
+import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 
 const socketConfig:SocketIoConfig={
@@ -73,32 +78,32 @@ const socketConfig:SocketIoConfig={
     UploadVideoComponent,
     VideoDetailsComponent,
     VideoListComponent,
-    EnumToArrayPipe
+    EnumToArrayPipe,
+    VideoComponent,
+    VideoDetailsFormComponent
   ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpClientModule,
-        AppRoutingModule,
-        MatGridListModule,
-        MatCardModule,
-        MatMenuModule,
-        MatIconModule,
-        MatButtonModule,
-        LayoutModule,
-        ApiModule.forRoot({rootUrl: 'http://localhost:8083'}),
-        SocketIoModule.forRoot(socketConfig),
-        NbChatModule,
-        BrowserAnimationsModule, NoopAnimationsModule, ReactiveFormsModule,
-        LayoutModule,
-      NgOptimizedImage, ServiceWorkerModule.register('ngsw-worker.js', {
-  enabled: !isDevMode(),
-  // Register the ServiceWorker as soon as the application is stable
-  // or after 30 seconds (whichever comes first).
-  registrationStrategy: 'registerWhenStable:30000'
-})
-    ],
-  exports:[],//Added for routing
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    LayoutModule,
+    ApiModule.forRoot({rootUrl: 'http://localhost:8083'}),
+    SocketIoModule.forRoot(socketConfig),
+    NbChatModule,
+    BrowserAnimationsModule, NoopAnimationsModule, ReactiveFormsModule,
+    LayoutModule,
+    NgOptimizedImage, ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000'
+    }), MatInputModule, MatLegacyChipsModule, MatAutocompleteModule
+  ],
+  exports:[],
   providers: [HttpClient],
   bootstrap: [AppComponent]
 })

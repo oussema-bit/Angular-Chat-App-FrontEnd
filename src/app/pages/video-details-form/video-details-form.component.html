@@ -1,0 +1,61 @@
+<div class="video-detail-container">
+  <div class="form-container">
+    <form [formGroup]="videoForm" (ngSubmit)="onSubmit()">
+      <input formControlName="videoTitle" placeholder="Title" name="Title">
+      <input formControlName="videoDescription" placeholder="Description" name="Description">
+      <input type="hidden" formControlName="videoUrl">
+
+      <div class="form-group">
+        <label for="visibilitySelect">Visibility</label>
+        <select id="visibilitySelect" formControlName="visibility" name="visibility" class="ng-untouched ng-pristine ng-valid">
+          <option *ngFor="let v of Visible | enumToArray" [value]="v">{{v}}</option>
+        </select>
+      </div>
+
+
+      <label for="niveauSelect">Niveau</label>
+      <select id="niveauSelect" formControlName="niveau" name="niveau">
+        <option *ngFor="let n of Niveau | enumToArray" [value]="n">{{n}}</option>
+      </select>
+
+      <label for="optionSelect">Option</label>
+      <select id="optionSelect" formControlName="option" name="option">
+        <option *ngFor="let o of OptionEnum | enumToArray" [value]="o">{{o}}</option>
+      </select>
+
+      <mat-form-field class="full-width">
+        <mat-chip-list #chipList aria-label="Tag selection" formArrayName="tags">
+          <!-- Corrected loop to access the .controls property of FormArray -->
+          <mat-chip *ngFor="let tagControl of tags.controls; let i = index"
+                    [selectable]="true"
+                    [removable]="true"
+                    (removed)="remove(i)"> <!-- Correct the remove method to use index -->
+            {{ tagControl.value.tag }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="New tag..."
+                 [formControl]="tagCtrl"
+                 [matAutocomplete]="auto"
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addFromAutocomplete($event)">
+          <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+            {{ tag }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+
+
+      <button type="submit" >Submit</button>
+    </form>
+  </div>
+  <div class="video-container">
+    <video width="640" height="240" controls *ngIf="videoUrl; else noVideo">
+      <source [src]="videoUrl" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <ng-template #noVideo><p>No video to display</p></ng-template>
+  </div>
+</div>

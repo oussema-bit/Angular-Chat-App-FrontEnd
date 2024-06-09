@@ -4,7 +4,6 @@ import {VideoService} from "../../services/farouk/video.service";
 import {Video} from "../../models/video.model";
 
 
-
 @Component({
   selector: 'app-video-details',
   templateUrl: './video-details.component.html',
