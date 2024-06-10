@@ -45,10 +45,13 @@ pipeline {
            steps {
               script {
                  // Use Jenkins credentials for Docker Hub login
-                 
-                
-                 sh "docker push ${imagename}:latest"
-                  
+                 withCredentials([usernamePassword(credentialsId: 'ab7a00a8-e667-49e9-a08d-cc976b4cc179',
+                  usernameVariable: 'DOCKER_USERNAME',
+                  passwordVariable: 'DOCKER_PASSWORD')])
+                  {
+                     sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                     sh "docker push ${imagename}:latest"
+                  }  
               }
            }
         }
