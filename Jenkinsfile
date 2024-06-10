@@ -46,7 +46,7 @@ pipeline {
               script {
                  // Use Jenkins credentials for Docker Hub login
                  
-                 sh "docker login -u oussemaayari2020 --password-stdin"
+                
                  sh "docker push ${imagename}:latest"
                   
               }
