@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:latest'
-        }
-    }
+    agent any
     tools {
       nodejs "NODEJS"
       maven "maven-spring-backend"
