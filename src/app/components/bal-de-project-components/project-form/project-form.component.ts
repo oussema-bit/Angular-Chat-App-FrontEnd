@@ -29,6 +29,7 @@ export class ProjectFormComponent implements OnInit{
   niveauOptions = ['PREMIERE', 'DEUXIEME', 'TROIXIEME', 'QUATRIEME', 'CINQUEME'];
   categoryList : CategoryProjectsDto[] = [];
   user:User = {}
+  videoUrl!: string;
   @Output() videoUploaded: EventEmitter<string> = new EventEmitter();
 
   //@ViewChild(UploadVideoComponent)
@@ -60,7 +61,7 @@ export class ProjectFormComponent implements OnInit{
       scolarYear: new FormControl(''), // Optional field
       votingpool: new FormControl(false), // Set default value for boolean
       winner: new FormControl(false),
-      videoUrl: new FormControl(''),
+      videoUrl: new FormControl(this.videoUrl),
     })
 
 
@@ -73,12 +74,9 @@ export class ProjectFormComponent implements OnInit{
   urlVideo!:string
   file:File []=[]
   onSubmit() {
-    if (this.uploadVidComp.selectedFile) {
-      this.file.push(this.uploadVidComp.selectedFile)
-      this.urlVideo=this.uploadVidComp.uploadFiles(this.file);
-      console.log("heeeeere" , this.urlVideo)
-    }
+
     this.project=this.projectForm.value
+    this.project.videoUrl = this.videoUrl;
     this.project.userId=this.jwtHelper.userId
     console.log(this.jwtHelper.userId);
     this.apiService.addProject({
@@ -97,5 +95,10 @@ export class ProjectFormComponent implements OnInit{
     if (input.files) {
       this.selectedFile = input.files[0];
     }
+  }
+
+  handleVideoUploaded(url: string) {
+    this.videoUrl = url;
+
   }
 }
