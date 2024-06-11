@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProjectsService} from "../../../services/radhouene/services/projects.service";
 import { Injectable } from '@angular/core';
@@ -10,11 +10,9 @@ import {UserService} from "../../../services/REST/User/user.service";
 import {UserDetails} from "../../../models/UserDetails";
 import {HelperService} from "../../../services/helper/helper.service";
 import {User} from "../../../services/User/models/user";
-import {Observable, throwError} from "rxjs";
+import {Observable} from "rxjs";
 import {UploadVideoComponent} from "../../../pages/upload-video/upload-video.component";
 import {VideoHelperService} from "../videoHelperService/video-helper.service";
-import {HttpClient, HttpEventType} from "@angular/common/http";
-import {catchError, map} from "rxjs/operators";
 
 
 
@@ -31,6 +29,7 @@ export class ProjectFormComponent implements OnInit{
   niveauOptions = ['PREMIERE', 'DEUXIEME', 'TROIXIEME', 'QUATRIEME', 'CINQUEME'];
   categoryList : CategoryProjectsDto[] = [];
   user:User = {}
+  videoUrl!: string;
   @Output() videoUploaded: EventEmitter<string> = new EventEmitter();
 
   //@ViewChild(UploadVideoComponent)
@@ -39,8 +38,7 @@ export class ProjectFormComponent implements OnInit{
     private categoryService : CategoryService,
     private router: Router,
     private jwtHelper:HelperService,
-    public  uploadVidComp : VideoHelperService,
-    private http: HttpClient
+    public  uploadVidComp : VideoHelperService
   ) {
   }
 
@@ -63,7 +61,7 @@ export class ProjectFormComponent implements OnInit{
       scolarYear: new FormControl(''), // Optional field
       votingpool: new FormControl(false), // Set default value for boolean
       winner: new FormControl(false),
-      videoUrl: new FormControl(''),
+      videoUrl: new FormControl(this.videoUrl),
     })
 
 
@@ -76,13 +74,9 @@ export class ProjectFormComponent implements OnInit{
   urlVideo!:string
   file:File []=[]
   onSubmit() {
-    if (this.uploadVidComp.selectedFile) {
-      this.file.push(this.uploadVidComp.selectedFile)
-      //this.uploadFiles(this.file);
-      this.urlVideo
-      console.log("heeeeere" , this.urlVideo)
-    }
+
     this.project=this.projectForm.value
+    this.project.videoUrl = this.videoUrl;
     this.project.userId=this.jwtHelper.userId
     console.log(this.jwtHelper.userId);
     this.apiService.addProject({
@@ -92,5 +86,19 @@ export class ProjectFormComponent implements OnInit{
          next : async() => console.log(this.project)
       });
       this.router.navigate(["/contest"])
+  }
+
+
+  selectedFile?: File;
+  onFileSelect(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.selectedFile = input.files[0];
+    }
+  }
+
+  handleVideoUploaded(url: string) {
+    this.videoUrl = url;
+
   }
 }

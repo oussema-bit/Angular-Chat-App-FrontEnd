@@ -70,6 +70,7 @@ import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 import {MatOptionModule} from "@angular/material/core";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import { InputFileComponent } from './components/bal-de-project-components/input-file/input-file.component';
 
 
 const socketConfig:SocketIoConfig={
@@ -117,6 +118,7 @@ const socketConfig:SocketIoConfig={
     EnumToArrayPipe,
     VideoComponent,
     VideoDetailsFormComponent,
+    InputFileComponent,
     FooterComponent
   ],
   imports: [

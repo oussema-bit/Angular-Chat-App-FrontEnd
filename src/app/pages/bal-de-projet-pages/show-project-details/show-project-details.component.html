@@ -67,10 +67,10 @@
           </tbody>
         </table>
         <h2 class="text-white mt-0">Here's the application preview!</h2>
-        <iframe width="420" height="315"
-                src="https://www.youtube.com/embed/wW5N-XuQTc4?si=rkkoa1_dDyPEFDjp">
-
-        </iframe>
+        <video width="640" height="240" controls *ngIf="project.videoUrl">
+          <source [src]="project.videoUrl" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
         <hr class="divider divider-light" />
         <p class="text-white-75 mb-4">if you find the {{project.groupName}} work impressive vote it up in the contest <span class="link-info btn" [routerLink]="['/show-contest',project.contest?.id]">page</span></p>
         <a class="btn btn-light btn-xl" href="#services">Get Started!</a>
