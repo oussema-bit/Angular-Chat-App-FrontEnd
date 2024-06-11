@@ -1,0 +1,82 @@
+<div class="bg-dark p-3">
+  <div class="container container-fluid bg-dark text-white ">
+
+    <form [formGroup]="projectForm" class="container w-50 ">
+
+      <div class="form-group p-2">
+        <label for="optionSpeciality">option speciality:</label>
+        <select class="form-control bg-dark text-white" id="optionSpeciality" formControlName="optionSpeciality">
+          <option *ngFor="let optionSpeciality of optionList" [value]="optionSpeciality.id">{{ optionSpeciality.name }} {{optionSpeciality.id}}</option> </select>
+        <div *ngIf="projectForm.get('optionSpeciality')?.invalid && projectForm.get('optionSpeciality')?.touched" class="alert alert-danger">
+          Please select an option speciality.
+        </div>
+      </div>
+
+      <div class="form-group p-2">
+        <label for="category">Category:</label>
+        <select class="form-control bg-dark text-white" id="category" formControlName="category">
+          <option *ngFor="let category of categoryList" [value]="category.id">{{ category.name }}</option> </select>
+        <div *ngIf="projectForm.get('category')?.invalid && projectForm.get('category')?.touched" class="alert alert-danger">
+          Please select a category.
+        </div>
+      </div>
+
+      <div class="form-group p-2">
+        <label for="name">Project Name:</label>
+        <input type="text" class="form-control bg-dark text-white" id="name" formControlName="name">
+        <div *ngIf="projectForm.get('name')?.invalid && projectForm.get('name')?.touched" class="alert alert-danger">
+          Please enter a project name.
+        </div>
+      </div>
+
+      <div class="form-group p-2">
+        <label for="groupName">Group Name:</label>
+        <input type="text" class="form-control bg-dark text-white" id="groupName" formControlName="groupName">
+        <div *ngIf="projectForm.get('groupName')?.invalid && projectForm.get('groupName')?.touched" class="alert alert-danger">
+          Please enter a group name.
+        </div>
+      </div>
+
+      <div class="form-group p-2">
+        <label for="classe">Classe:</label>
+        <input type="text" class="form-control bg-dark text-white" id="classe" formControlName="classe">
+      </div>
+
+      <div class="form-group p-2">
+        <label for="scolarYear">Scolar Year:</label>
+        <input type="text" class="form-control bg-dark text-white" id="scolarYear" formControlName="scolarYear">
+      </div>
+      <div class="form-group p-2">
+        <label for="coach">Coach:</label>
+        <input type="text" class="form-control bg-dark text-white" id="coach" formControlName="coach">
+      </div>
+
+
+      <div class="form-group p-2">
+        <label for="date">Date:</label>
+        <input type="date" class="form-control bg-dark text-white" id="date" formControlName="date">
+      </div>
+      <div class="form-group p-2">
+        <label for="imageUrl">Image: </label>
+        <input type="file" class="form-control bg-dark text-white" id="imageUrl" formControlName="imageUrl" (change)="onFileSelected($event)">
+      </div>
+      <div class="form-group p-2">
+        <label for="videoUrl">paste the project presentation url: </label>
+        <input type="text" class="form-control bg-dark text-white" id="videoUrl" formControlName="videoUrl">
+      </div>
+
+      <div class="form-group p-2">
+        <label for="niveau">Niveau:</label>
+        <select class="form-control bg-dark text-white" id="niveau" formControlName="niveau">
+          <option *ngFor="let option of niveauOptions" [value]="option">{{ option }}</option>
+        </select>
+        <div *ngIf="projectForm.get('niveau')?.invalid && projectForm.get('niveau')?.touched" class="alert alert-danger">
+          Please select a level.
+        </div>
+        <div class=" m-2 w-50">
+          <button type="submit"  class="btn btn-outline-light w-75" (click)="onSubmit()"> save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

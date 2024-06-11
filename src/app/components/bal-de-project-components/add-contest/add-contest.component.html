@@ -1,41 +1,47 @@
-<div class="register-container">
-  <h3 class="h3-register" >Register</h3>
-  <div class="container container-fluid">
-    <form>
-      <div  class="alert alert-danger" >
-        <p > </p>
+<div class="bg-dark p-3">
+  <div class="container container-fluid bg-dark text-white ">
+
+    <form [formGroup]="contestForm" class="container w-50 ">
+
+      <div class="form-group p-2">
+        <label for="name">Contest Name:</label>
+        <input type="text" class="form-control bg-dark text-white" id="name" formControlName="name">
+        <div *ngIf="contestForm.get('name')?.invalid && contestForm.get('name')?.touched" class="alert alert-danger">
+          Please enter a contest name.
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+      <div class="form-group p-2">
+        <label for="description">Description:</label>
+        <input type="text" class="form-control bg-dark text-white" id="description" formControlName="description">
+        <div *ngIf="contestForm.get('description')?.invalid && contestForm.get('description')?.touched" class="alert alert-danger">
+          Please enter a description name.
+        </div>
+      </div>
+      <div class="form-group p-2">
+        <label for="deadline">Deadline :</label>
+        <input type="datetime-local" class="form-control bg-dark text-white" id="deadline" formControlName="deadline">
       </div>
 
-      <div class="mb-3">
-        <label for="lastname" class="form-label">First Name</label>
-        <input   type="text" class="form-control" id="lastname" aria-describedby="emailHelp">
+      <div class="form-group p-2">
+        <label for="option">Option:</label>
+        <select class="form-control bg-dark text-white" id="option" formControlName="option">
+          <option *ngFor="let op of optionSpecialityList" [value]="op.id">{{ op.name }}</option> </select>
+        <div *ngIf="contestForm.get('option')?.invalid && contestForm.get('option')?.touched" class="alert alert-danger">
+          Please select a category.
+        </div>
       </div>
 
 
-
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input  type="password" class="form-control" id="exampleInputPassword1" >
-      </div>
-
-      <!--      <div class="mb-3 form-check">-->
-      <!--        <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
-      <!--        <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
-      <!--      </div>-->
-      <div class="d-flex justify-content-between mb-3">
-        <button  type="submit" class="btn btn-primary">Submit
-          <em class="fas fa-sign-in-alt">&nbsp;</em>
-        </button>
-        <div>
-          already have an account?&nbsp;
-          <button type="button" class="btn btn-link">
-            login <em class="fas fa-registered">&nbsp;</em>
-          </button>
+      <div class="form-group p-2">
+        <label for="niveau">Niveau:</label>
+        <select class="form-control bg-dark text-white" id="niveau" formControlName="niveau">
+          <option *ngFor="let option of niveauOptions" [value]="option">{{ option }}</option>
+        </select>
+        <div *ngIf="contestForm.get('niveau')?.invalid && contestForm.get('niveau')?.touched" class="alert alert-danger">
+          Please select a level.
+        </div>
+        <div class="m-2 w-50">
+          <button type="submit"   class="btn btn-outline-light" (click)="createContest()" > save</button>
         </div>
       </div>
     </form>

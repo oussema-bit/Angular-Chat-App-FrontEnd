@@ -1,5 +1,6 @@
-/* tslint:disable */
-/* eslint-disable */
+/*
+/!* tslint:disable *!/
+/!* eslint-disable *!/
 import { HttpClient, HttpContext, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -29,3 +30,4 @@ export function saveUser(http: HttpClient, rootUrl: string, params: SaveUser$Par
 }
 
 saveUser.PATH = '/users';
+*/

@@ -9,7 +9,6 @@
     "test": "ng test",
     "api-gen-bal-de-projet": "ng-openapi-gen --input ./src/app/swagger/swagger-radhouene.json --output src/app/services/radhouene/",
     "api-gen-ahmed": "ng-openapi-gen --input ./src/app/swagger/swagger-ahmed.json --output src/app/services/Role/",
-
     "api-gen-salim": "ng-openapi-gen --input ./src/app/swagger/swagger-salim.json --output src/app/services/salim/"
   },
   "private": true,
@@ -39,9 +38,11 @@
     "ngx-toaster": "^1.0.1",
     "rxjs": "~7.8.0",
     "sockjs": "^0.3.24",
+    "startbootstrap-creative": "^7.0.7",
+    "startbootstrap-shop-item": "^5.0.6",
     "sockjs-client": "^1.6.1",
     "stompjs": "^2.3.3",
-    "sweetalert2": "^11.6.13",
+    "@sweetalert2/ngx-sweetalert2": "^12.3.0",
     "tslib": "^2.3.0",
     "web-push": "^3.6.7",
     "zone.js": "~0.12.0"

@@ -11,13 +11,24 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { addContest } from '../fn/contest-bal-de-projet/add-contest';
 import { AddContest$Params } from '../fn/contest-bal-de-projet/add-contest';
+import { assignProjectToContest } from '../fn/contest-bal-de-projet/assign-project-to-contest';
+import { AssignProjectToContest$Params } from '../fn/contest-bal-de-projet/assign-project-to-contest';
 import { ContestDto } from '../models/contest-dto';
+import { customSaveContest } from '../fn/contest-bal-de-projet/custom-save-contest';
+import { CustomSaveContest$Params } from '../fn/contest-bal-de-projet/custom-save-contest';
 import { deleteContestById } from '../fn/contest-bal-de-projet/delete-contest-by-id';
 import { DeleteContestById$Params } from '../fn/contest-bal-de-projet/delete-contest-by-id';
 import { getAllContests } from '../fn/contest-bal-de-projet/get-all-contests';
 import { GetAllContests$Params } from '../fn/contest-bal-de-projet/get-all-contests';
 import { getContestById } from '../fn/contest-bal-de-projet/get-contest-by-id';
 import { GetContestById$Params } from '../fn/contest-bal-de-projet/get-contest-by-id';
+import { getProjectWinnerByContest } from '../fn/contest-bal-de-projet/get-project-winner-by-contest';
+import { GetProjectWinnerByContest$Params } from '../fn/contest-bal-de-projet/get-project-winner-by-contest';
+import { ProjectsDto } from '../models/projects-dto';
+import { unAssignProjectToContest } from '../fn/contest-bal-de-projet/un-assign-project-to-contest';
+import { UnAssignProjectToContest$Params } from '../fn/contest-bal-de-projet/un-assign-project-to-contest';
+import { updateContest } from '../fn/contest-bal-de-projet/update-contest';
+import { UpdateContest$Params } from '../fn/contest-bal-de-projet/update-contest';
 
 @Injectable({ providedIn: 'root' })
 export class ContestBalDeProjetService extends BaseService {
@@ -75,6 +86,106 @@ export class ContestBalDeProjetService extends BaseService {
     );
   }
 
+  /** Path part for operation `updateContest()` */
+  static readonly UpdateContestPath = '/contest-bal-de-projet/update/{id}/{optionId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `updateContest()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  updateContest$Response(params: UpdateContest$Params, context?: HttpContext): Observable<StrictHttpResponse<ContestDto>> {
+    return updateContest(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `updateContest$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  updateContest(params: UpdateContest$Params, context?: HttpContext): Observable<ContestDto> {
+    return this.updateContest$Response(params, context).pipe(
+      map((r: StrictHttpResponse<ContestDto>): ContestDto => r.body)
+    );
+  }
+
+  /** Path part for operation `customSaveContest()` */
+  static readonly CustomSaveContestPath = '/contest-bal-de-projet/save-contest/{optionId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `customSaveContest()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  customSaveContest$Response(params: CustomSaveContest$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return customSaveContest(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `customSaveContest$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  customSaveContest(params: CustomSaveContest$Params, context?: HttpContext): Observable<void> {
+    return this.customSaveContest$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
+    );
+  }
+
+  /** Path part for operation `unAssignProjectToContest()` */
+  static readonly UnAssignProjectToContestPath = '/contest-bal-de-projet/unassign-project-to-contest/{contestDtoID}/{projectId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `unAssignProjectToContest()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  unAssignProjectToContest$Response(params: UnAssignProjectToContest$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return unAssignProjectToContest(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `unAssignProjectToContest$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  unAssignProjectToContest(params: UnAssignProjectToContest$Params, context?: HttpContext): Observable<void> {
+    return this.unAssignProjectToContest$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
+    );
+  }
+
+  /** Path part for operation `assignProjectToContest()` */
+  static readonly AssignProjectToContestPath = '/contest-bal-de-projet/assign-project-to-contest/{contestDtoID}/{projectId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `assignProjectToContest()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  assignProjectToContest$Response(params: AssignProjectToContest$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return assignProjectToContest(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `assignProjectToContest$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  assignProjectToContest(params: AssignProjectToContest$Params, context?: HttpContext): Observable<void> {
+    return this.assignProjectToContest$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
+    );
+  }
+
   /** Path part for operation `getContestById()` */
   static readonly GetContestByIdPath = '/contest-bal-de-projet/{id}';
 
@@ -122,6 +233,31 @@ export class ContestBalDeProjetService extends BaseService {
   deleteContestById(params: DeleteContestById$Params, context?: HttpContext): Observable<void> {
     return this.deleteContestById$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
+    );
+  }
+
+  /** Path part for operation `getProjectWinnerByContest()` */
+  static readonly GetProjectWinnerByContestPath = '/contest-bal-de-projet/getWinnerByContest/{contestID}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getProjectWinnerByContest()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getProjectWinnerByContest$Response(params: GetProjectWinnerByContest$Params, context?: HttpContext): Observable<StrictHttpResponse<ProjectsDto>> {
+    return getProjectWinnerByContest(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getProjectWinnerByContest$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getProjectWinnerByContest(params: GetProjectWinnerByContest$Params, context?: HttpContext): Observable<ProjectsDto> {
+    return this.getProjectWinnerByContest$Response(params, context).pipe(
+      map((r: StrictHttpResponse<ProjectsDto>): ProjectsDto => r.body)
     );
   }
 

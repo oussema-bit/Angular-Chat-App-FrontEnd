@@ -1,0 +1,65 @@
+<div class="bg-dark p-3">
+  <div class="container container-fluid bg-dark text-white ">
+
+    <form [formGroup]="contestForm" class="container w-50 ">
+      <div class="container row">
+          <h1 class="fw-bold align-items-center ms-5 center "> UPDATE CONTEST !</h1>
+      </div>
+      <div class="form-group p-2">
+        <label for="name">Contest Name:</label>
+        <input type="text" class="form-control bg-dark text-white" id="name" formControlName="name">
+        <div *ngIf="contestForm.get('name')?.invalid && contestForm.get('name')?.touched" class="alert alert-danger">
+          Please enter a contest name.
+        </div>
+      </div>
+      <div class="form-group p-2">
+        <label for="description">Description:</label>
+        <input type="text" class="form-control bg-dark text-white" id="description" formControlName="description">
+        <div *ngIf="contestForm.get('description')?.invalid && contestForm.get('description')?.touched" class="alert alert-danger">
+          Please enter a description name.
+        </div>
+      </div>
+      <div class="form-group p-2">
+        <label for="deadline">Deadline :</label>
+        <input type="datetime-local" class="form-control bg-dark text-white" id="deadline" formControlName="deadline">
+      </div>
+      <div class="form-group p-2">
+        <label for="imageUrl">image :</label>
+        <input type="file" class="form-control bg-dark text-white" id="imageUrl" formControlName="imageUrl" (change)="onFileSelected($event)">
+      </div>
+
+      <div class="form-group p-2">
+        <label for="option">Option:</label>
+        <select class="form-control bg-dark text-white" id="option" formControlName="option">
+          <option *ngFor="let op of optionSpecialityList" [value]="op.id">{{ op.name }}</option> </select>
+        <div *ngIf="contestForm.get('option')?.invalid && contestForm.get('option')?.touched" class="alert alert-danger">
+          Please select an option.
+        </div>
+      </div>
+
+
+      <div class="form-group p-2">
+        <label for="project">select project to assign to this contest:</label>
+        <select class="form-control bg-dark text-white" id="project" formControlName="project">
+          <option *ngFor="let project of projectList" [value]="project.id">Project name:{{ project.name }} - Group Name: {{project.groupName}}</option> </select>
+        <div *ngIf="contestForm.get('project')?.invalid && contestForm.get('project')?.touched" class="alert alert-danger">
+          Please select a contest.
+        </div>
+      </div>
+
+
+      <div class="form-group p-2">
+        <label for="niveau">Niveau:</label>
+        <select class="form-control bg-dark text-white" id="niveau" formControlName="niveau">
+          <option *ngFor="let option of niveauOptions" [value]="option">{{ option }}</option>
+        </select>
+        <div *ngIf="contestForm.get('niveau')?.invalid && contestForm.get('niveau')?.touched" class="alert alert-danger">
+          Please select a level.
+        </div>
+        <div class=" m-2 w-50">
+          <button type="submit" (click)="updateContest()"  class="btn btn-outline-light w-75" > save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
