@@ -47,7 +47,7 @@ const routes:Routes=[
   },
   {
     path:'home',
-    component:MyFirstCompComponent
+    component:ContestComponent
   },
   {
     path:'upload-video',
