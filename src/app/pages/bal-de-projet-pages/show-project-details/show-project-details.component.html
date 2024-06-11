@@ -67,10 +67,18 @@
           </tbody>
         </table>
         <h2 class="text-white mt-0">Here's the application preview!</h2>
-        <video width="640" height="240" controls *ngIf="project.videoUrl">
-          <source [src]="project.videoUrl" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+
+        <div *ngIf="isAws">
+          <video width="640" height="240" controls *ngIf="project.videoUrl">
+            <source [src]="project.videoUrl" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div *ngIf="isYoutube" >
+          <iframe width="560" height="315" [src]="urlSafe"
+                  title="Esprit competitive  - Apex - PI_Cloud" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
         <hr class="divider divider-light" />
         <p class="text-white-75 mb-4">if you find the {{project.groupName}} work impressive vote it up in the contest <span class="link-info btn" [routerLink]="['/show-contest',project.contest?.id]">page</span></p>
         <a class="btn btn-light btn-xl" href="#services">Get Started!</a>
