@@ -1,0 +1,47 @@
+<div class="bg-dark">
+<section class="">
+  <div class="container">
+    <div class="row">
+      <div class="col text-center mb-5">
+        <h1 class="display-4 font-weight-bolder">Welcome here you can see all the student Projects!</h1>
+        <p class="lead"> this section displays all of our students projects support them we hope to see you here student !  </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let project of projects; index as i ">
+        <div class="card text-dark card-has-bg click-col" style="background-image:url('https://source.unsplash.com/600x900/?tech,street');">
+        <img class="card-img d-none" src="assets/{{project.imageUrl}}" alt="Creative Manner Design Lorem Ipsum Sit Amet Consectetur dipisi?">
+        <div  class="card-img-overlay d-flex flex-column" [routerLink]="['/show-project-details',project.id]">
+          <div class="card-body">
+            <small class="card-meta mb-2">{{project.name}}</small>
+            <h4 class="card-title mt-0 "><a class="text-dark" herf="https://creativemanner.com">{{project.groupName}}</a></h4>
+            <small><i class="far fa-clock"></i> {{project.date}}</small>
+          </div>
+          <div class="card-footer">
+            <div class="media">
+              <img class="mr-3 rounded-circle" src="https://media.licdn.com/dms/image/D5603AQFF0rJXoerSkA/profile-displayphoto-shrink_400_400/0/1704406009737?e=2147483647&v=beta&t=b3RRz3kjPZ5MrUmuUB89oJeJxZt9Q5GzWMHyVyQ1ujs" alt="Generic placeholder image" style="max-width:50px">
+              <div class="media-body">
+                <h6 class="my-0 text-dark d-block">{{project.niveau}}</h6>
+                <small>{{project.optionSpeciality?.name}}</small>
+              </div>
+              <div class="align-content-lg-end" *ngIf="user.includes('ADMIN')">
+                <button class="btn btn-secondary m-2" [routerLink]="['/update-project',project.id]"> edit </button>
+                <button class="btn btn-danger" (click)="deleteTheProject(i,project.id)"> delete </button>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div></div>
+
+
+
+
+
+
+    </div>
+
+  </div>
+</section>
+</div>

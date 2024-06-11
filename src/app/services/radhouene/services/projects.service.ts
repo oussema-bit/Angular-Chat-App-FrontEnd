@@ -11,6 +11,8 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { addProject } from '../fn/projects/add-project';
 import { AddProject$Params } from '../fn/projects/add-project';
+import { customSave } from '../fn/projects/custom-save';
+import { CustomSave$Params } from '../fn/projects/custom-save';
 import { deleteProject } from '../fn/projects/delete-project';
 import { DeleteProject$Params } from '../fn/projects/delete-project';
 import { getAllProjects } from '../fn/projects/get-all-projects';
@@ -25,7 +27,13 @@ import { getNominatedProjects } from '../fn/projects/get-nominated-projects';
 import { GetNominatedProjects$Params } from '../fn/projects/get-nominated-projects';
 import { getProjectById } from '../fn/projects/get-project-by-id';
 import { GetProjectById$Params } from '../fn/projects/get-project-by-id';
+import { getProjectsByContest } from '../fn/projects/get-projects-by-contest';
+import { GetProjectsByContest$Params } from '../fn/projects/get-projects-by-contest';
 import { ProjectsDto } from '../models/projects-dto';
+import { updateProject } from '../fn/projects/update-project';
+import { UpdateProject$Params } from '../fn/projects/update-project';
+import { voteUp } from '../fn/projects/vote-up';
+import { VoteUp$Params } from '../fn/projects/vote-up';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectsService extends BaseService {
@@ -79,6 +87,81 @@ export class ProjectsService extends BaseService {
    */
   addProject(params: AddProject$Params, context?: HttpContext): Observable<ProjectsDto> {
     return this.addProject$Response(params, context).pipe(
+      map((r: StrictHttpResponse<ProjectsDto>): ProjectsDto => r.body)
+    );
+  }
+
+  /** Path part for operation `customSave()` */
+  static readonly CustomSavePath = '/projects/save-project/{optionId}/{categoryId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `customSave()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  customSave$Response(params: CustomSave$Params, context?: HttpContext): Observable<StrictHttpResponse<ProjectsDto>> {
+    return customSave(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `customSave$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  customSave(params: CustomSave$Params, context?: HttpContext): Observable<ProjectsDto> {
+    return this.customSave$Response(params, context).pipe(
+      map((r: StrictHttpResponse<ProjectsDto>): ProjectsDto => r.body)
+    );
+  }
+
+  /** Path part for operation `voteUp()` */
+  static readonly VoteUpPath = '/projects/voteUp/{projectId}/{userId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `voteUp()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  voteUp$Response(params: VoteUp$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
+    return voteUp(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `voteUp$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  voteUp(params: VoteUp$Params, context?: HttpContext): Observable<boolean> {
+    return this.voteUp$Response(params, context).pipe(
+      map((r: StrictHttpResponse<boolean>): boolean => r.body)
+    );
+  }
+
+  /** Path part for operation `updateProject()` */
+  static readonly UpdateProjectPath = '/projects/updateProject/{projectId}/{optionId}/{categoryId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `updateProject()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  updateProject$Response(params: UpdateProject$Params, context?: HttpContext): Observable<StrictHttpResponse<ProjectsDto>> {
+    return updateProject(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `updateProject$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  updateProject(params: UpdateProject$Params, context?: HttpContext): Observable<ProjectsDto> {
+    return this.updateProject$Response(params, context).pipe(
       map((r: StrictHttpResponse<ProjectsDto>): ProjectsDto => r.body)
     );
   }
@@ -142,7 +225,7 @@ export class ProjectsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllWinners$Response(params: GetAllWinners$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ProjectsDto>>> {
+  getAllWinners$Response(params?: GetAllWinners$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ProjectsDto>>> {
     return getAllWinners(this.http, this.rootUrl, params, context);
   }
 
@@ -152,7 +235,7 @@ export class ProjectsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllWinners(params: GetAllWinners$Params, context?: HttpContext): Observable<Array<ProjectsDto>> {
+  getAllWinners(params?: GetAllWinners$Params, context?: HttpContext): Observable<Array<ProjectsDto>> {
     return this.getAllWinners$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<ProjectsDto>>): Array<ProjectsDto> => r.body)
     );
@@ -230,6 +313,31 @@ export class ProjectsService extends BaseService {
   getGroupsByWinningSteak(params: GetGroupsByWinningSteak$Params, context?: HttpContext): Observable<Array<string>> {
     return this.getGroupsByWinningSteak$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<string>>): Array<string> => r.body)
+    );
+  }
+
+  /** Path part for operation `getProjectsByContest()` */
+  static readonly GetProjectsByContestPath = '/projects/find-projects-by-contestID/{contestId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getProjectsByContest()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getProjectsByContest$Response(params: GetProjectsByContest$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ProjectsDto>>> {
+    return getProjectsByContest(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getProjectsByContest$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getProjectsByContest(params: GetProjectsByContest$Params, context?: HttpContext): Observable<Array<ProjectsDto>> {
+    return this.getProjectsByContest$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<ProjectsDto>>): Array<ProjectsDto> => r.body)
     );
   }
 

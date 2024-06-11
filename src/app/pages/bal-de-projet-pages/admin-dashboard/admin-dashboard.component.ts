@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import {ProjectsService} from "../../../services/radhouene/services/projects.service";
 import {ProjectsDto} from "../../../services/radhouene/models/projects-dto";
-import {UserService} from "../../../services/radhouene/services/user.service";
+
 
 
 @Component({
@@ -35,7 +35,6 @@ export class AdminDashboardComponent implements OnInit{
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private user : UserService,
     private projetService : ProjectsService
 
   ) {}
@@ -49,12 +48,7 @@ export class AdminDashboardComponent implements OnInit{
           console.log(data)
         }
       })
-    const test = this.user.findAll()
-      .subscribe({
-        next :(data)=>{
-          console.log(data.toString())
-        }
-        })
+
   }
 
 

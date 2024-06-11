@@ -46,6 +46,30 @@ import { VideoDetailsFormComponent } from './pages/video-details-form/video-deta
 import {MatInputModule} from "@angular/material/input";
 import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {
+  CompetitionsContestPageComponent
+} from "./pages/bal-de-projet-pages/constetv2/competitions-page/competitions-page.component";
+import {CompetitionsPageComponent} from "./pages/competition-page/competitions-page/competitions-page.component";
+import {ProjectFormComponent} from "./components/bal-de-project-components/project-form/project-form.component";
+import {
+  ConfirmationAlertComponent
+} from "./components/confirmation-pop-up/confirmation-alert/confirmation-alert.component";
+import {UpdateContestComponent} from "./pages/bal-de-projet-pages/update-contest/update-contest.component";
+import {UpdateProjectComponent} from "./pages/bal-de-projet-pages/update-project/update-project.component";
+import {ShowContestComponent} from "./pages/bal-de-projet-pages/show-contest/show-contest.component";
+import {
+  ShowProjectDetailsComponent
+} from "./pages/bal-de-projet-pages/show-project-details/show-project-details.component";
+import {ShowAllProjectsComponent} from "./pages/bal-de-projet-pages/show-all-projects/show-all-projects.component";
+import {AddCategoryComponent} from "./pages/bal-de-projet-pages/add-category/add-category.component";
+import {AddOptionComponent} from "./pages/bal-de-projet-pages/add-option/add-option.component";
+import {
+  CompetitionsCardComponent
+} from "./pages/bal-de-projet-pages/constetv2/competitions-card/competitions-card.component";
+import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
+import {MatOptionModule} from "@angular/material/core";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 
 const socketConfig:SocketIoConfig={
@@ -54,6 +78,8 @@ const socketConfig:SocketIoConfig={
 }
 @NgModule({
   declarations: [
+    CompetitionsPageComponent,
+    CompetitionsContestPageComponent,
     AppComponent,
     MyFirstCompComponent,
     MessageDetailsComponent,
@@ -65,6 +91,13 @@ const socketConfig:SocketIoConfig={
     ChatPageComponent,
     ContestComponent,
     AdminDashboardComponent,
+    ProjectFormComponent,
+    ConfirmationAlertComponent,
+    UpdateContestComponent,
+    UpdateProjectComponent,
+    ShowContestComponent,
+    ShowProjectDetailsComponent,
+    ShowAllProjectsComponent,
     FooterComponent,
     AddContestComponent,
     UserChatComponent,
@@ -73,6 +106,9 @@ const socketConfig:SocketIoConfig={
     RoleComponent,
     ForgotPasswordComponent,
     LoadingMessageComponent,
+    AddCategoryComponent,
+    AddOptionComponent,
+    CompetitionsCardComponent,
     EventsComponent,
     EventsdetailsComponent,
     UploadVideoComponent,
@@ -98,10 +134,11 @@ const socketConfig:SocketIoConfig={
     NbChatModule,
     BrowserAnimationsModule, NoopAnimationsModule, ReactiveFormsModule,
     LayoutModule,
+    SweetAlert2Module.forRoot(),
     NgOptimizedImage, ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'
-    }), MatInputModule, MatLegacyChipsModule, MatAutocompleteModule
+    }), MatInputModule, MatLegacyChipsModule, MatAutocompleteModule ,MatOptionModule,MatDialogModule,MatFormFieldModule
   ],
   exports:[],
   providers: [HttpClient],

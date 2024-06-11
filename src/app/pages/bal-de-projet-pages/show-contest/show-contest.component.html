@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Shop Item - Start Bootstrap Template</title>
+
+</head>
+<div class=" ">
+<!-- Navigation-->
+
+<!-- Product section-->
+<section class="py-5 bg-dark text-white object-fit-contain">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="row gx-4 gx-lg-5 align-items-center">
+      <div *ngIf="userRoles.includes('ADMIN')" class="container m-2">
+        <form [formGroup]="form" class="container w-50 ">
+        <div class="form-group p-2">
+          <label for="project">Add project:</label>
+          <select class="form-control bg-dark text-white cente" id="project" formControlName="project">
+            <option *ngFor="let project of allprojectList " [value]="project.id">Project Name : {{ project.name }} <br> Groupe Name : {{project.groupName}}  <br> Classe : {{project.classe}}</option> </select>
+          <button type="submit" class="btn btn-outline-success w-100" (click)="affectTheProjectToTheCurrentContest()">save </button>
+        </div>
+        </form>
+      </div>
+
+      <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="assets/{{contest.image}}" alt="..." /></div>
+      <div class="col-md-6">
+        <div class="small mb-1">Contest {{contest.name}}</div>
+        <h1 class="display-5 fw-bolder">Contest Speciality: {{ contest.option?.name }}</h1>
+
+          <p>Vote deadline: {{contest.deadline}}</p>
+        <span>Contest Grade: {{contest.niveau}}</span>
+        <p class="lead">{{contest.description}}</p>
+        <div class="d-flex">
+          <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+          <button class="btn btn-outline-dark flex-shrink-0" type="button">
+            <i class="bi-cart-fill me-1"></i>
+            Add to cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Related items section-->
+<section class="py-5 bg-dark object-fit-contain text-white">
+<!--  <div class="container px-4 px-lg-5 mt-5" *ngIf="contest.allowVote">-->
+  <div class="container px-4 px-lg-5 mt-5" >
+    <h2 class="fw-bolder mb-4">Vote for the most impressive projects!</h2>
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+      <div class="col mb-5" *ngFor="let projects of projectList;index as i"  >
+        <div class="card h-100">
+          <!-- Product image-->
+          <img class="card-img-top" src="https://img.freepik.com/vecteurs-libre/vecteur-degrade-logo-colore-oiseau_343694-1365.jpg?w=740&t=st=1715717247~exp=1715717847~hmac=1f2cdde208d9dd4dc331c0f5e435efcc5ddeab3a518ad9902a2181b596fd0568" alt="..."  [routerLink]="['/show-project-details',projects.id]"/>
+
+          <!-- Product details-->
+          <div class="card-body p-4">
+            <div class="text-center ">
+              <!-- Product name-->
+              <h4  > <span class="fw-bold">Project Name :</span>  {{projects.name}}  <i class="fa fa-trophy blue-icon"></i></h4>
+              <h4 class="">
+                <span class="fw-bold">Group Coach</span>
+                {{projects.coach}}  <i class="fa fa-medal blue-icon"></i>
+              </h4>
+              <!-- Product price-->
+              <h4 class="">
+                <span class="fw-bold">Speciality</span>
+                {{projects.optionSpeciality?.name}}  <i class="fa fa-terminal blue-icon"></i>
+              </h4>
+              <h4 class="">
+                <span class="fw-bold">Category</span>
+                {{projects.category?.name}}  <i class="fa fa-code blue-icon"></i>
+              </h4>
+            </div>
+          </div>
+          <!-- Product actions-->
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent btn">
+            <div class="text-center">
+              <a *ngIf="userRoles.includes('ADMIN')" class="fa fa-minus btn-danger" (click)="unassignProject(projects.id,i)">remove</a>
+              <a class="fa fa-circle-up w-50 link-success " (click)="voteUp(projects.id)"> vote</a>
+              <a class="fw-bold text-black" > {{projects.numberOfVotes}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <section class="page-section bg-primary" id="about" *ngIf="contest.allowVote==false">
+    <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-lg-8 text-center">
+
+          <h2 class="text-white mt-0">THE VOTE FINISHED AND THE WINNDER IS {{winner.classe}}!</h2>
+          <img src="assets/win-celebration.png"  class="container">
+          <hr class="divider divider-light" />
+          <p class="text-white-75 mb-4">if you find the  work impressive vote it up in the contest </p>
+          <a class="btn btn-light btn-xl" href="#services">Get Started!</a>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- Footer-->
+</div>
+</html>

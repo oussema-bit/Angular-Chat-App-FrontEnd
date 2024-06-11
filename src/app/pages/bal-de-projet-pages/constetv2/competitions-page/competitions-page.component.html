@@ -1,0 +1,54 @@
+<div class="competition-section1 bg-dark">
+  <div class="competition-cards-layout">
+    <div class="container center">
+      <div class="card-title text-white ">
+
+      </div>
+    </div>
+
+    <div *ngIf="myUser.includes('ADMIN')" class="container m-2 center">
+      <div class="form-group p-2 col-2">
+        <button type="submit" class="btn btn-outline-success m-1 w-50" [routerLink]="['/add-contest']"> add Contest</button>
+        <button type="submit" class="btn btn-outline-primary m-1 w-50" [routerLink]="['/add-project-form']"> add project</button>
+      </div>
+    </div>
+    <div class="container d-flex justify-content-center align-items-center text-white full-height pt-5">
+      <h1 class="title ">Navigate the Contest Page !</h1>
+    </div>
+  </div>
+  <div class="competition-cards-container" *ngFor="let contest of headerContestList">
+    <app-competitions-card [var1]="contest.name"></app-competitions-card>
+  </div>
+</div>
+<div class="competition-lists-container bg-dark">
+  <div class="competition-lists-layout">
+    <div class="competition-lists rounded-5">
+      <div class="competition-container" *ngFor="let contest of contestList; index as i">
+        <img class="competition-img rounded-2" src="assets/{{contest.image}}" [routerLink]="['/show-contest',contest.id]" alt="" srcset="" >
+        <div class="competition-text">
+          <span>name: {{contest.name}}</span>
+          <span>deadline: {{contest.deadline?.substring(0,10)}} at : {{contest.deadline?.substring(11,16)}} AM</span>
+          <p>May 5, 2024 3:30 AM GMT+1</p>
+        </div>
+        <div class="small col-1" *ngIf="myUser.includes('ADMIN')">
+          <a [routerLink]="['/update-contest',contest.id]" class="small btn btn-outline-light" (click)="editContest(contest.id)">edit</a>
+          <a class="btn btn-outline-danger small m-2" (click)="deleteTheContest(contest.id,i)">  -  </a>
+        </div>
+      </div>
+    </div>
+    <div class="leaderboard" >
+      <h1 >
+        <svg class="ico-cup">
+          <use xlink:href="#cup"></use>
+        </svg>
+        <i class="fa fa-trophy m-3 color-icon"></i>Hall of Fame
+      </h1>
+      <ol >
+        <li *ngFor="let project of projectListWinners; index as i" >
+          <mark >{{project.groupName}}</mark>
+          <small>{{project.classe}}</small>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>

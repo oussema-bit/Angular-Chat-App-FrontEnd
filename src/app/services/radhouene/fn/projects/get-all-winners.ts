@@ -9,13 +9,11 @@ import { RequestBuilder } from '../../request-builder';
 import { ProjectsDto } from '../../models/projects-dto';
 
 export interface GetAllWinners$Params {
-  b: boolean;
 }
 
-export function getAllWinners(http: HttpClient, rootUrl: string, params: GetAllWinners$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ProjectsDto>>> {
+export function getAllWinners(http: HttpClient, rootUrl: string, params?: GetAllWinners$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ProjectsDto>>> {
   const rb = new RequestBuilder(rootUrl, getAllWinners.PATH, 'get');
   if (params) {
-    rb.query('b', params.b, {});
   }
 
   return http.request(

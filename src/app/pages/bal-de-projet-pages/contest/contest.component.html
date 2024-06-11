@@ -1,42 +1,79 @@
 <div class="rounded container-fluid bg-dark bg-gradient" >
   <div class="row justify-content-center ">
     <div class=" rounded col-6   text-center align-items-baseline">
-      <img src="assets/trophee.png" alt="imgz" style="max-width: 50%;">
+      <img src="assets/contest_image.png" alt="imgz" style="max-width: 50%;">
     </div>
 
   </div>
-  <div class=" p-5 row justify-content-end  ">
-    <div  class=" rounded col-6
-    secondary-bg
-    border border-black border-1
-    text-center
-    align-items-baseline">
-
-      <p class="text-white  "> Contests</p>
+  <div class="p-5 row align-content-center  ">
+    <div  class="rounded col-7 ms-5  secondary-bg border border-black border-1 ">
+      <div *ngIf="loading">
+        <!-- Display loading indicator here -->
+        Loading...
+      </div>
+      <p class="text-white  "><i class="fa-solid fa-trophy "></i> Contests</p>
       <div class="row m-auto "><!--here we load all the contests-->
-        <div class="card bg-dark-subtle " style="width: 18rem;" *ngFor="let contest of contestList">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">{{ contest.name }}</h5>
-            <p class="card-text"> {{ contest.description}}</p>
-            <a href="#" class="btn btn-primary"> display competition</a>
+<!--        <div class="card bg-dark-subtle " style="width: 18rem;" *ngFor="let contest of contestList">-->
+<!--          <img src="assets/racing%20contest.jpg"  class="card-img-top overflow-auto" alt="...">-->
+<!--          <div class="card-body">-->
+<!--            <h5 class="card-title">{{ contest.name }}</h5>-->
+<!--            <p class="card-text"> {{ contest.description}}</p>-->
+<!--            <a href="#" class="btn btn-primary"> display competition</a>-->
+<!--          </div>-->
+<!--        </div>-->
+        <div class="card m-2" *ngFor="let contest of contestList ; index as i" >
+          <div class="no-image" [routerLink]="['/show-contest',contest.id]">
+            <img src="assets/{{contest.image}}"  class="card-img-top overflow-auto" alt="...">
           </div>
+          <div class="content">
+            <p class="name">{{ contest.name }}</p>
+            <p class="time">{{ contest.description}}</p>
+          </div>
+          <div class="small" *ngIf="myUser.includes('ADMIN')">
+            <a [routerLink]="['/update-contest',contest.id]" class="btn btn-outline-light small" (click)="editContest(contest.id)"> edit </a>
+            <a class="btn btn-outline-danger small m-2" (click)="deleteTheContest(contest.id,i)"> delete </a>
+          </div>
+
         </div>
+
         <div >
 
         </div>
       </div>
     </div>
-    <div  class=" rounded col-6
-    secondary-bg
-    border border-black border-1
-    text-center
-    align-items-baseline">
 
-      <p class="text-white"> Ranking </p>
-      <div ><!--here we load all the winners-->
 
+    <div  class="rounded col-3  secondary-bg  border border-black border-1 text-center align-items-baseline m-5">
+      <p class="text-white"> <i class="fa-solid fa-award "></i> Ranking </p>
+      <div class="walletBalanceCard border border-1 m-2" *ngFor="let pl of projectList; index as i ">
+        <div class="svgwrapper"   [routerLink]="['/show-project-details',pl.id]">
+          <img src="favicon.ico">
+        </div>
+
+        <div class="balancewrapper">
+          <span class="balanceHeading "> Group Name: {{ pl.groupName }}</span>
+          <span class="balanceHeading">Speciality: {{ pl.optionSpeciality?.name}}</span>
+          <span class="balanceHeading">Classe: {{ pl.classe}}</span>
+          <span class="balanceHeading"> Coach: {{pl.coach}}</span>
+          <span class="balanceHeading">year: {{pl.scolarYear}}</span>
+
+          <div class="balanceHeading" *ngIf="myUser.includes('ADMIN')">
+            <a *ngIf="myUser.includes('USER')" class="fa fa-eye small balanceHeading link-success" [routerLink]="['/show-project-details',pl.id]" (click)="showProject(pl.id)">  </a>
+            <a *ngIf="myUser.includes('ADMIN')" class="fa fa-edit balanceHeading m-2 link-primary" [routerLink]="['/update-project',pl.id]"  (click)="editProject(pl.id)">  </a>
+            <a *ngIf="myUser.includes('ADMIN')" class="fa fa-x small balanceHeading link-danger" (click)="deleteTheProject(i,pl.id)">  </a>
+          </div>
+
+
+        </div>
       </div>
+
+
+
+
+
+
+
     </div>
   </div>
 </div>
+<router-outlet></router-outlet> <!-- Child components will be rendered here -->

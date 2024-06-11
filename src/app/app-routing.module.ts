@@ -20,6 +20,19 @@ import {UploadVideoComponent} from "./pages/upload-video/upload-video.component"
 import {VideoDetailsComponent} from "./pages/video-details/video-details.component";
 import {VideoListComponent} from "./pages/video-list/video-list.component";
 import {VideoComponent} from "./pages/video/video.component";
+import {
+  CompetitionsContestPageComponent
+} from "./pages/bal-de-projet-pages/constetv2/competitions-page/competitions-page.component";
+import {ShowContestComponent} from "./pages/bal-de-projet-pages/show-contest/show-contest.component";
+import {UpdateContestComponent} from "./pages/bal-de-projet-pages/update-contest/update-contest.component";
+import {
+  ShowProjectDetailsComponent
+} from "./pages/bal-de-projet-pages/show-project-details/show-project-details.component";
+import {UpdateProjectComponent} from "./pages/bal-de-projet-pages/update-project/update-project.component";
+import {ShowAllProjectsComponent} from "./pages/bal-de-projet-pages/show-all-projects/show-all-projects.component";
+import {ProjectFormComponent} from "./components/bal-de-project-components/project-form/project-form.component";
+import {AddOptionComponent} from "./pages/bal-de-projet-pages/add-option/add-option.component";
+import {AddCategoryComponent} from "./pages/bal-de-projet-pages/add-category/add-category.component";
 
 
 
@@ -90,6 +103,41 @@ const routes:Routes=[
   {
     path:'contest',
     component:ContestComponent
+  },
+  {
+    path:'contest-page',
+    component:CompetitionsContestPageComponent
+  },
+  {path: "show-contest/:id",
+    component:ShowContestComponent
+  },
+  {path: "update-contest/:id",
+    component:UpdateContestComponent
+  },
+  {path: "show-project-details/:id",
+    component:ShowProjectDetailsComponent
+  },
+  {path: "update-project/:id",
+    component:UpdateProjectComponent
+  },
+  {path: "show-all-projects",
+    component:ShowAllProjectsComponent
+  },
+  {
+    path:"add-contest",
+    component:AddContestComponent
+  },
+  {
+    path: 'add-project-form',
+    component:ProjectFormComponent
+  },
+  {
+    path:'add-option',
+    component:AddOptionComponent
+  },
+  {
+    path:"add-category",
+    component:AddCategoryComponent
   },
   {path:"showevent/:id",component: EventsdetailsComponent},
   {

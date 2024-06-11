@@ -31,7 +31,9 @@
               "src/styles.css",
               "node_modules/@nebular/theme/styles/prebuilt/default.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.css"
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/startbootstrap-shop-item/dist/css/styles.css",
+              "node_modules/startbootstrap-creative/dist/css/styles.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
