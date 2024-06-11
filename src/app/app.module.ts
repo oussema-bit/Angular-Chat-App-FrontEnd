@@ -116,7 +116,8 @@ const socketConfig:SocketIoConfig={
     VideoListComponent,
     EnumToArrayPipe,
     VideoComponent,
-    VideoDetailsFormComponent
+    VideoDetailsFormComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

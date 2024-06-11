@@ -49,7 +49,7 @@
     </div>
     <div class="form-group p-2">
       <label for="video">Video:</label>
-      <input type="file" (change)="onFileSelect($event)" #fileInput  id="video" formControlName="videoUrl">
+      <input type="file" (videoUploaded)="this.uploadVidComp.onFileSelect($event)" #fileInput  id="video" formControlName="videoUrl">
 
     </div>
 

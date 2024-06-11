@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProjectsService} from "../../../services/radhouene/services/projects.service";
 import { Injectable } from '@angular/core';
@@ -10,9 +10,11 @@ import {UserService} from "../../../services/REST/User/user.service";
 import {UserDetails} from "../../../models/UserDetails";
 import {HelperService} from "../../../services/helper/helper.service";
 import {User} from "../../../services/User/models/user";
-import {Observable} from "rxjs";
+import {Observable, throwError} from "rxjs";
 import {UploadVideoComponent} from "../../../pages/upload-video/upload-video.component";
 import {VideoHelperService} from "../videoHelperService/video-helper.service";
+import {HttpClient, HttpEventType} from "@angular/common/http";
+import {catchError, map} from "rxjs/operators";
 
 
 
@@ -37,7 +39,8 @@ export class ProjectFormComponent implements OnInit{
     private categoryService : CategoryService,
     private router: Router,
     private jwtHelper:HelperService,
-    public  uploadVidComp : VideoHelperService
+    public  uploadVidComp : VideoHelperService,
+    private http: HttpClient
   ) {
   }
 
@@ -75,7 +78,8 @@ export class ProjectFormComponent implements OnInit{
   onSubmit() {
     if (this.uploadVidComp.selectedFile) {
       this.file.push(this.uploadVidComp.selectedFile)
-      this.urlVideo=this.uploadVidComp.uploadFiles(this.file);
+      //this.uploadFiles(this.file);
+      this.urlVideo
       console.log("heeeeere" , this.urlVideo)
     }
     this.project=this.projectForm.value
@@ -88,14 +92,5 @@ export class ProjectFormComponent implements OnInit{
          next : async() => console.log(this.project)
       });
       this.router.navigate(["/contest"])
-  }
-
-
-  selectedFile?: File;
-  onFileSelect(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files) {
-      this.selectedFile = input.files[0];
-    }
   }
 }
