@@ -75,9 +75,9 @@ export class ProjectFormComponent implements OnInit{
   onSubmit() {
     if (this.uploadVidComp.selectedFile) {
       this.file.push(this.uploadVidComp.selectedFile)
+      this.urlVideo=this.uploadVidComp.uploadFiles(this.file);
+      console.log("heeeeere" , this.urlVideo)
     }
-    this.urlVideo=this.uploadVidComp.uploadFiles(this.file);
-    console.log(this.urlVideo)
     this.project=this.projectForm.value
     this.project.userId=this.jwtHelper.userId
     console.log(this.jwtHelper.userId);
@@ -88,5 +88,14 @@ export class ProjectFormComponent implements OnInit{
          next : async() => console.log(this.project)
       });
       this.router.navigate(["/contest"])
+  }
+
+
+  selectedFile?: File;
+  onFileSelect(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.selectedFile = input.files[0];
+    }
   }
 }

@@ -1,6 +1,6 @@
 import {catchError, map} from "rxjs/operators";
 import {HttpClient, HttpEventType} from "@angular/common/http";
-import {Component, ElementRef, EventEmitter, Injectable, Output, ViewChild} from "@angular/core";
+import {Component, ElementRef, EventEmitter, Output, ViewChild} from "@angular/core";
 import {throwError} from "rxjs";
 
 @Component({
@@ -8,7 +8,6 @@ import {throwError} from "rxjs";
   templateUrl: './upload-video.component.html',
   styleUrls: ['./upload-video.component.css']
 })
-@Injectable()
 export class UploadVideoComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
   selectedFile?: File;
@@ -63,9 +62,9 @@ export class UploadVideoComponent {
   triggerFileUpload() {
     this.fileInput.nativeElement.click();
   }
-  url!:string
-  uploadFiles(files: File[]): string {
-    if (!files.length) return "empty file";
+
+  uploadFiles(files: File[]): void {
+    if (!files.length) return;
 
     this.isUploading = true;
     const formData = new FormData();
@@ -82,7 +81,6 @@ export class UploadVideoComponent {
         } else if (event.type === HttpEventType.Response) {
           // Handle response received
           this.videoUploaded.emit(event.body.url);
-          this.url=event.body.url;
           this.uploadProgress = undefined;
           this.isUploading = false;
         }
@@ -95,7 +93,6 @@ export class UploadVideoComponent {
         return throwError(() => new Error('Failed to upload video.'));
       })
     ).subscribe();
-    return this.url ;
   }
 
 }
