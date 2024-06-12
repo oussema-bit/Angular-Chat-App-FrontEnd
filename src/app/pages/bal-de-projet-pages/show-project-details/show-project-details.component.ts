@@ -33,7 +33,7 @@ export class ShowProjectDetailsComponent implements OnInit{
         console.log("isYoutube" ,JSON.stringify(this.isYoutube))
         console.log(this.project.videoUrl)
 
-          this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(<string>this.project.videoUrl);
+        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(<string>this.project.videoUrl);
         console.log((this.urlSafe))
 
       }

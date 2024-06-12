@@ -13,6 +13,7 @@ import {
   ConfirmationAlertComponent
 } from "../../../components/confirmation-pop-up/confirmation-alert/confirmation-alert.component";
 import {MatDialog} from "@angular/material/dialog";
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-show-contest',
@@ -33,15 +34,28 @@ import {MatDialog} from "@angular/material/dialog";
     private contestService : ContestBalDeProjetService,
     private jwtHelper : HelperService,
     private dialog: MatDialog,
+    public sanitizer: DomSanitizer
+
   ) {
   }
   projectList : ProjectsDto[]=[]//to display projects that are affected to the contest
   allprojectList : ProjectsDto[]=[]//to display all the project so the admin can affect to the current contest
   contest!:Contest
+  urlSafe!: SafeResourceUrl;
+
   fillProjectList(leId:number){
     this.projectsService.getProjectsByContest({contestId : leId}).subscribe({
       next : (data)=>{
         this.projectList=data
+        for(let project of this.projectList){
+          if(project.videoUrl?.includes('videos.s3')){
+            project.imageUrl="AWS"
+          }
+          if(project.videoUrl?.includes("youtube")){
+            project.imageUrl="YOUTUBE"
+          }
+          console.log(project)
+        }
       }
     })
   }
@@ -49,9 +63,24 @@ import {MatDialog} from "@angular/material/dialog";
     this.projectsService.getAllProjects().subscribe({
       next : (data)=>{
         this.allprojectList=data
+        for(let project of this.allprojectList){
+
+          if(project.videoUrl?.includes('videos.s3')){
+
+            project.imageUrl="AWS"
+          }
+          if(project.videoUrl?.includes("youtube")){
+            project.imageUrl="YOUTUBE"
+          }
+        }
+
       }
     })
 
+  }
+
+  sanitizeUrl(url:any){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   unassignProject(id: any,i:number){
